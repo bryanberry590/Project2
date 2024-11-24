@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Project2</string>
+    <string name="welcome_n_user">Welcome to Creature Buddies</string>
+    <string name="select_your_n_creature">Select Your Creature</string>
+    <string name="char1">Creature 1</string>
+    <string name="char2">Creature 2</string>
+    <string name="char3">Creature 3</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_n_admin">Welcome Admin</string>
+    <string name="edit_base_stats">Edit Base Stats</string>
+    <string name="select_starters">Select Starters</string>
+    <string name="not_copyrighted">Not Copyrighted</string>
+    <string name="edit_creature_buddy">Edit Creature Buddy</string>
+    <string name="battle">Battle</string>
+    <string name="pc_health">PC Health</string>
+    <string name="attack">Attack</string>
+    <string name="defend">Defend</string>
+    <string name="todo">TODO</string>
 </resources>

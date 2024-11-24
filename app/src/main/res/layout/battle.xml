@@ -36,7 +36,7 @@
         android:id="@+id/character1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         app:layout_constraintTop_toBottomOf="@id/health"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="64dp"
@@ -46,10 +46,9 @@
         android:id="@+id/character2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/todo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/character1"
-        app:layout_constraintEnd_toEndOf=""
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp" />
 
