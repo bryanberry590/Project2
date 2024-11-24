@@ -8,14 +8,11 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/greeting"
-        android:layout_width="382dp"
-        android:layout_height="167dp"
-        android:layout_marginTop="16dp"
-        android:padding="8dp"
-        android:text="@string/welcome"
-        android:gravity="center"
-        android:textSize="32sp"
+        android:id="@+id/welcomeMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
@@ -81,5 +78,17 @@
 
 
 
+
+    <Button
+        android:id="@+id/hiddenBtn"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:text="@string/random"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
+        tools:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/welcomeMessage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

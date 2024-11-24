@@ -16,4 +16,9 @@
     <string name="attack">Attack</string>
     <string name="defend">Defend</string>
     <string name="todo">TODO</string>
+    <string name="login_welcome">Welcome to Creature Buddies \n Sign in to Continue</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="random">Random</string>
 </resources>
