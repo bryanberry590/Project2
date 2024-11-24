@@ -43,7 +43,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="64dp"
         android:text="@string/char1"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/character2"
@@ -54,7 +54,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="64dp"
         android:text="@string/char2"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/character3"
@@ -65,7 +65,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginTop="64dp"
         android:text="@string/char3"
-        android:textSize="18sp" />
+        android:textSize="13sp" />
 
 
 
