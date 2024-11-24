@@ -45,7 +45,12 @@ public class CreatureBuddyRepository {
     public void insertUser(User... user) {
         CreatureBuddyDatabase.databaseWriteExecutor.execute(() ->
         {
-            userDAO.insert(user);
+            try {
+                userDAO.insert(user); // Perform the insert on the background thread
+                Log.d("CreatureBuddyRepository", "User inserted successfully: " + user[0].getUsername());
+            } catch (Exception e) {
+                Log.e("CreatureBuddyRepository", "Error inserting user", e);
+            }
         });
 
     }
