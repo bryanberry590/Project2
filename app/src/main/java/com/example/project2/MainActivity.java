@@ -5,17 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
 import com.example.project2.database.CreatureBuddyRepository;
@@ -38,21 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginUser();
-
+        repository = CreatureBuddyRepository.getRepository(getApplication());
+        loginUser(savedInstanceState);
 
         if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntent(getApplicationContext());
             startActivity(intent);
         }
-
-        repository = CreatureBuddyRepository.getRepository(getApplication());
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
     }
 
@@ -62,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 
-    private void loginUser() {
+    private void loginUser(Bundle savedInstanceState) {
         //check shared reference for logged in user / Dr.C goes over this in video 11 @ around 22 min
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY,
                 Context.MODE_PRIVATE); // making it private makes it only accessible by the app and not system wide
@@ -72,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //check intent for logged in user
         loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, LOGGED_OUT);
+        Log.i(TAG, "Logged in user id: " + loggedInUserId);
         if (loggedInUserId == LOGGED_OUT) {
             return;
         }
