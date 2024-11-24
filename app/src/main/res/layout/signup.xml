@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".SignUpActivity">
 
     <TextView
         android:id="@+id/titleLoginTextView"
@@ -14,12 +14,12 @@
         android:layout_margin="16dp"
         android:layout_marginBottom="20dp"
         android:gravity="center"
-        android:text="@string/login_welcome"
+        android:text="@string/create_account_below"
         android:textSize="42sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <!-- Option + command + L to format -->
+
     <EditText
         android:id="@+id/usernameLoginEditText"
         android:layout_width="match_parent"
@@ -48,13 +48,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/usernameLoginEditText" />
 
-    <Button
-        android:id="@+id/loginButton"
+    <EditText
+        android:id="@+id/passwordCheckEditText"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="75dp"
         android:layout_margin="16dp"
-        android:text="@string/login"
-        android:textSize="30sp"
+        android:autofillHints="Please enter your password"
+        android:gravity="center"
+        android:hint="@string/re_type_password"
+        android:inputType="textPassword"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordLoginEditText" />
@@ -68,6 +71,8 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordCheckEditText" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

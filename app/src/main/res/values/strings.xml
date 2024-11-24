@@ -21,4 +21,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="random">Random</string>
+    <string name="create_account">Create Account</string>
+    <string name="re_type_password">Re-Type Password</string>
+    <string name="create_account_below">Create Account Below</string>
 </resources>
