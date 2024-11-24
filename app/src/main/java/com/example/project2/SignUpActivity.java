@@ -47,7 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
         String passwordCheck = binding.passwordCheckEditText.getText().toString();
 
         if(username.isEmpty() || password.isEmpty() || passwordCheck.isEmpty()){
-            toastMaker("Username cannot be blank");
+            toastMaker("Text fields cannot be blank");
             return;
         } else {
             if(!password.equals(passwordCheck)){
