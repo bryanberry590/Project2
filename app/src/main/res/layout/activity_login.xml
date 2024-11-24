@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="16dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center"
         android:text="@string/login_welcome"
         android:textSize="42sp"

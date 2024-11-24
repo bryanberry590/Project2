@@ -25,6 +25,7 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
     private static volatile CreatureBuddyDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
     static CreatureBuddyDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (CreatureBuddyDatabase.class) {

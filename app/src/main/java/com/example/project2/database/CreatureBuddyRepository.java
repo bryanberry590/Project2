@@ -3,6 +3,8 @@ package com.example.project2.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.project2.MainActivity;
 import com.example.project2.database.entities.User;
 
@@ -46,5 +48,13 @@ public class CreatureBuddyRepository {
             userDAO.insert(user);
         });
 
+    }
+
+    public LiveData<User> getUserByUsername(String username) {
+        return userDAO.getUserByUsername(username);
+    }
+
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
     }
 }
