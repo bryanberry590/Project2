@@ -9,7 +9,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import com.example.project2.databinding.ActivityMainBinding;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -29,19 +32,32 @@ public class MainActivity extends AppCompatActivity {
     private int loggedInUserId = -1;
     private User user;
 
+    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         repository = CreatureBuddyRepository.getRepository(getApplication());
         loginUser(savedInstanceState);
-
         if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntent(getApplicationContext());
             startActivity(intent);
         }
+        System.out.println(user);
+        if(user != null && user.isAdmin()){
+            binding.hiddenBtn.setVisibility(View.VISIBLE);
+        } else{
+            binding.hiddenBtn.setVisibility(View.INVISIBLE);
+        }
 
+        binding.hiddenBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     static Intent mainActivityIntent(Context context, int userId) {
