@@ -45,12 +45,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LoginActivity.loginIntent(getApplicationContext());
             startActivity(intent);
         }
-        System.out.println(user);
-        if(user != null && user.isAdmin()){
-            binding.hiddenBtn.setVisibility(View.VISIBLE);
-        } else{
-            binding.hiddenBtn.setVisibility(View.INVISIBLE);
-        }
+        binding.hiddenBtn.setVisibility(View.VISIBLE);
+
+//        if(user != null && user.getId() == 1){
+//            binding.hiddenBtn.setVisibility(View.VISIBLE);
+//        } else if(user != null && user.getId() != 1){
+//            binding.hiddenBtn.setVisibility(View.INVISIBLE);
+//        }
 
         binding.hiddenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +82,18 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, user -> {
-            if (user != null) {
-                this.user = user;
+        userObserver.observe(this, retrievedUser -> {
+            if (retrievedUser != null) {
+                user = retrievedUser;
+                System.out.println("The new user is: " + this.user);
+                if(loggedInUserId == 1){
+                    binding.hiddenBtn.setVisibility(View.VISIBLE);
+                } else {
+                    binding.hiddenBtn.setVisibility(View.INVISIBLE);
+                }
                 invalidateOptionsMenu();
+            }else {
+                Log.d(TAG, "No user found with id: " + loggedInUserId);
             }
         });
     }
