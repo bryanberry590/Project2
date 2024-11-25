@@ -24,4 +24,7 @@
     <string name="create_account">Create Account</string>
     <string name="re_type_password">Re-Type Password</string>
     <string name="create_account_below">Create Account Below</string>
+    <string name="admin_options">Admin Options</string>
+    <string name="select_your_creature_buddy">Select Your Creature Buddy</string>
+    <string name="buddy_name">buddy name</string>
 </resources>
