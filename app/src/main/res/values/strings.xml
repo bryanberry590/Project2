@@ -30,4 +30,7 @@
     <string name="profile">Profile</string>
     <string name="new_username">New Username</string>
     <string name="new_password">New Password</string>
+    <string name="update_account">Update Account</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="delete_account">Delete Account</string>
 </resources>

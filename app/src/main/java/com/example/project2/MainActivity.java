@@ -146,7 +146,8 @@ public class MainActivity extends AppCompatActivity {
         profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
-                //TODO: route user to the profile activity
+                Intent newIntent = profileIntent(getApplicationContext());
+                startActivity(newIntent);                
                 return false;
             }
         });
@@ -185,6 +186,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static Intent profileIntent(Context context) {
-        return new Intent(context, LoginActivity.class); //TODO: change to profileActivity.class
+        return new Intent(context, ProfileActivity.class);
     }
 }
