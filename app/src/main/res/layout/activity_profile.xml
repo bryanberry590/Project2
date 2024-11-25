@@ -65,7 +65,7 @@
         android:layout_margin="20dp"
         android:text="@string/update_account"
         android:textSize="18sp"
-        android:id="@+id/deleteAccountBtn"
+        android:id="@+id/updateAccountBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/passwordCheckEditText" />
@@ -76,9 +76,10 @@
         android:layout_margin="20dp"
         android:text="@string/delete_account"
         android:textSize="18sp"
+        android:id="@+id/deleteAccountBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/deleteAccountBtn" />
+        app:layout_constraintTop_toBottomOf="@id/updateAccountBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
