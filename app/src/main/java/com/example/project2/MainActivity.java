@@ -53,6 +53,27 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
             }
         });
+
+        binding.creature1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "You selected creature 1", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.creature2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "You selected creature 2", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.creature3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "You selected creature 3", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     static Intent mainActivityIntent(Context context, int userId) {
