@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         userObserver.observe(this, retrievedUser -> {
             if (retrievedUser != null) {
                 user = retrievedUser;
+                String text = binding.welcomeMessage.getText().toString().toUpperCase() + " " + user.getUsername().toUpperCase();
+                binding.welcomeMessage.setText(text);
                 System.out.println("The new user is: " + this.user);
                 if(loggedInUserId == 1){
                     binding.hiddenBtn.setVisibility(View.VISIBLE);
