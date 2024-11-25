@@ -27,4 +27,5 @@
     <string name="admin_options">Admin Options</string>
     <string name="select_your_creature_buddy">Select Your Creature Buddy</string>
     <string name="buddy_name">buddy name</string>
+    <string name="profile">Profile</string>
 </resources>

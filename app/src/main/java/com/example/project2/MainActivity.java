@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.project2.databinding.ActivityMainBinding;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
@@ -138,6 +140,16 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        MenuItem profile = menu.findItem(R.id.profileMenuItem);
+        profile.setVisible(true);
+        profile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+                //TODO: route user to the profile activity
+                return false;
+            }
+        });
         return true;
     }
 
@@ -170,5 +182,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPrefEditor.apply();
         getIntent().putExtra(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
         startActivity(LoginActivity.loginIntent(getApplicationContext()));
+    }
+
+    static Intent profileIntent(Context context) {
+        return new Intent(context, LoginActivity.class); //TODO: change to profileActivity.class
     }
 }
