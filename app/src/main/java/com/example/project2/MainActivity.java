@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
                 Intent newIntent = profileIntent(getApplicationContext());
-                startActivity(newIntent);                
+                startActivity(newIntent);
                 return false;
             }
         });
