@@ -28,4 +28,6 @@
     <string name="select_your_creature_buddy">Select Your Creature Buddy</string>
     <string name="buddy_name">buddy name</string>
     <string name="profile">Profile</string>
+    <string name="new_username">New Username</string>
+    <string name="new_password">New Password</string>
 </resources>
