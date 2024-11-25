@@ -47,12 +47,6 @@ public class MainActivity extends AppCompatActivity {
         }
         binding.hiddenBtn.setVisibility(View.VISIBLE);
 
-//        if(user != null && user.getId() == 1){
-//            binding.hiddenBtn.setVisibility(View.VISIBLE);
-//        } else if(user != null && user.getId() != 1){
-//            binding.hiddenBtn.setVisibility(View.INVISIBLE);
-//        }
-
         binding.hiddenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
