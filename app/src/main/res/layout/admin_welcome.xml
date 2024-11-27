@@ -12,9 +12,9 @@
         android:layout_width="382dp"
         android:layout_height="167dp"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:padding="8dp"
         android:text="@string/welcome_n_admin"
-        android:gravity="center"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -25,35 +25,34 @@
         android:id="@+id/editBaseStat"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/greeting"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
         android:text="@string/edit_base_stats"
-        android:textSize="32sp" />
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/greeting" />
+
     <Button
         android:id="@+id/selectStarter"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editBaseStat"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:text="@string/select_starters"
-        android:textSize="32sp" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="130dp"
-        android:padding="8dp"
-        android:gravity="center"
-        android:text="@string/not_copyrighted"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectStarter"
-        tools:ignore="SmallSp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editBaseStat" />
 
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="130dp"
+        android:layout_height="80dp"
+        android:layout_margin="40dp"
+        android:text="@string/back"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selectStarter" />
 
 
 

@@ -33,4 +33,17 @@
     <string name="update_account">Update Account</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="delete_account">Delete Account</string>
+    <string name="todo_your_creature_stats_here">TODO: YOUR CREATURE STATS HERE</string>
+    <string name="play">Play</string>
+    <string name="back">Back</string>
+    <string name="edit_screen_message">Edit Creature Buddy</string>
+    <string name="health">Health:</string>
+    <string name="healthHint">Health</string>
+    <string name="attack_label">Attack:</string>
+    <string name="attack_hint">Attack</string>
+    <string name="defense_label">Defense:</string>
+    <string name="defense">Defense</string>
+    <string name="creature_image">Creature Image</string>
+    <string name="submit_changes">Submit Changes</string>
+    <string name="submit_starters">Submit Starters</string>
 </resources>
