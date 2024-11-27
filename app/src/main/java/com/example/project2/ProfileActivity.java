@@ -47,24 +47,49 @@ public class ProfileActivity extends AppCompatActivity{
         binding.updateAccountBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: route back to the login page, update the user account information accordingly,
-                // logout user, and take back to login
-
                 updateUserAccount();
+            }
+        });
 
-                Intent intent = loginIntent(getApplicationContext());
-                startActivity(intent);
+        binding.deleteAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteUser();
             }
         });
     }
 
+    private void deleteUser(){
+        int userId = user.getId();
+        Toast.makeText(ProfileActivity.this, "USER ID FOR DELETE USER IS " + userId, Toast.LENGTH_SHORT).show();
+        if(userId > -1){
+            repository.deleteUser(userId);
+            logout();
+        } else {
+            Toast.makeText(ProfileActivity.this, "Problem Deleting User", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void updateUserAccount(){
-        return;
+        int userId = user.getId();
+        String newUsername = binding.usernameLoginEditText.getText().toString();
+        String newPassword = binding.passwordLoginEditText.getText().toString();
+        String newPasswordCheck = binding.passwordCheckEditText.getText().toString();
+
+        if(!newUsername.isEmpty() && !newPassword.isEmpty() && !newPasswordCheck.isEmpty()) {
+            if(newPassword.equals(newPasswordCheck)){
+                repository.updateUser(userId, newUsername, newPassword);
+                logout();
+            } else {
+                Toast.makeText(ProfileActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(ProfileActivity.this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setEditText() {
         Log.d(TAG, "setEditText() called");
-        //Toast.makeText(this, "setEditText() called", Toast.LENGTH_SHORT).show();
 
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 ProfileActivity.SHARED_PREFERENCE_USERID_KEY, Context.MODE_PRIVATE);

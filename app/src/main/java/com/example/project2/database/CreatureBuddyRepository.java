@@ -55,6 +55,18 @@ public class CreatureBuddyRepository {
 
     }
 
+    public void updateUser(int userId, String newUsername, String newPassword){
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() ->{
+            userDAO.updateUser(userId, newUsername, newPassword);
+        });
+    }
+
+    public void deleteUser(int userId){
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
+            userDAO.deleteUser(userId);
+        });
+    }
+
     public LiveData<User> getUserByUsername(String username) {
         return userDAO.getUserByUsername(username);
     }

@@ -32,4 +32,10 @@ public interface UserDAO {
     @Query("SELECT * FROM " + CreatureBuddyDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
 
+    @Query("UPDATE " + CreatureBuddyDatabase.USER_TABLE + " SET username = :newUsername, password = :newPassword WHERE id = :userId")
+    void updateUser(int userId, String newUsername, String newPassword);
+
+    @Query("DELETE FROM " + CreatureBuddyDatabase.USER_TABLE + " WHERE id == :userId")
+    void deleteUser(int userId);
+
 }
