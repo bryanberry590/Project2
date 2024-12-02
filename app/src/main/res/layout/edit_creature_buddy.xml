@@ -122,7 +122,8 @@
         android:contentDescription="@string/creature_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/defenseLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/defenseLabel"
+        android:src="@drawable/mewtwo"/>
 <!--   TODO: for imageView, if we want the image of a creature to appear there, we need "android:src="PATH", -->
 <!--        else we can remove the image view entirely and spread out the page elements -->
 
