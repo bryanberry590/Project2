@@ -90,7 +90,7 @@ public class CreatureBuddyRepository {
         });
     }
 
-    public void updateBuddies(int buddiesId, String newName, int newHealth, int newAttack, int newDefense, int newImage){
+    public void updateBuddies(int buddiesId, String newName, int newHealth, int newAttack, int newDefense, String newImage){
         CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
             buddiesDAO.updateBuddies(buddiesId, newName, newHealth, newAttack, newDefense, newImage);
         });

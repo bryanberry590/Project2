@@ -17,10 +17,10 @@ public class Buddies {
     private int health;
     private int attack;
     private int defense;
-    private int imageSource;
+    private String imageSource;
     private boolean isStarter;
 
-    public Buddies(String name, int health, int attack, int defense, int imageResource){
+    public Buddies(String name, int health, int attack, int defense, String imageResource){
         this.name = name;
         this.health = health;
         this.attack = attack;
@@ -49,7 +49,7 @@ public class Buddies {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Buddies buddies = (Buddies) o;
-        return id == buddies.id && health == buddies.health && attack == buddies.attack && defense == buddies.defense && isStarter == buddies.isStarter && imageSource == buddies.imageSource && Objects.equals(name, buddies.name);
+        return id == buddies.id && health == buddies.health && attack == buddies.attack && defense == buddies.defense && isStarter == buddies.isStarter && imageSource.equals(buddies.imageSource) && Objects.equals(name, buddies.name);
     }
 
     @Override
@@ -105,11 +105,11 @@ public class Buddies {
         isStarter = starter;
     }
 
-    public int getImageSource() {
+    public String getImageSource() {
         return imageSource;
     }
 
-    public void setImageSource(int imageSource) {
+    public void setImageSource(String imageSource) {
         this.imageSource = imageSource;
     }
 }

@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // increment every time you change the database
-@Database(entities = {User.class , Buddies.class}, version = 4, exportSchema = false)
+@Database(entities = {User.class , Buddies.class}, version = 5, exportSchema = false)
 public abstract class CreatureBuddyDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
@@ -63,10 +63,10 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
 
                 BuddiesDAO dao2 = INSTANCE.buddiesDAO();
                 dao2.deleteAll();
-                Buddies testBuddy1 = new Buddies("testBuddy1", 10, 100, 10, R.drawable.charizard);
+                Buddies testBuddy1 = new Buddies("testBuddy1", 10, 100, 10, "@drawable/mewtwo");
                 testBuddy1.setStarter(true);
                 dao2.insert(testBuddy1);
-                Buddies testBuddy2 = new Buddies("testBuddy2", 1, 400, 20, R.drawable.pikachu);
+                Buddies testBuddy2 = new Buddies("testBuddy2", 1, 400, 20, "@drawable/bulbasaur");
                 dao2.insert(testBuddy2);
             });
         }
