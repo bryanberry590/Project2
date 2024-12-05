@@ -63,11 +63,27 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
 
                 BuddiesDAO dao2 = INSTANCE.buddiesDAO();
                 dao2.deleteAll();
-                Buddies testBuddy1 = new Buddies("testBuddy1", 10, 100, 10, 0, "@drawable/mewtwo");
-                testBuddy1.setStarter(true);
-                dao2.insert(testBuddy1);
-                Buddies testBuddy2 = new Buddies("testBuddy2", 1, 400, 20, 0, "@drawable/bulbasaur");
-                dao2.insert(testBuddy2);
+                Buddies breloom = new Buddies("breloom", 150, 100, 10, 0, "@drawable/breloom");
+                breloom.setStarter(true);
+
+                Buddies bulbasaur = new Buddies("bulbasaur", 160, 80, 20, 0, "@drawable/bulbasaur");
+                Buddies charizard = new Buddies("charizard", 200, 300, 25, 0, "@drawable/charizard");
+                Buddies gardevoir = new Buddies("gardevoir", 130, 150, 15, 0, "@drawable/gardevoir");
+                Buddies hawlucha = new Buddies("hawlucha", 170, 200, 20, 0, "@drawable/hawlucha");
+                Buddies mewtwo = new Buddies("mewtwo", 160, 180, 23, 0, "@drawable/mewtwo");
+                Buddies pikachu = new Buddies("pikachu", 175, 200, 25, 0, "@drawable/pikachu");
+                Buddies squirtle = new Buddies("squirtle", 185, 120, 15, 0, "@drawable/squirtle");
+                Buddies umbreon = new Buddies("umbreon", 190, 160, 18, 0, "@drawable/umbreon");
+                dao2.insert(breloom);
+                dao2.insert(bulbasaur);
+                dao2.insert(charizard);
+                dao2.insert(gardevoir);
+                dao2.insert(hawlucha);
+                dao2.insert(mewtwo);
+                dao2.insert(pikachu);
+                dao2.insert(squirtle);
+                dao2.insert(umbreon);
+
             });
         }
     };
