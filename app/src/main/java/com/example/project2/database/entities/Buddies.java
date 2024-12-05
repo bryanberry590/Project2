@@ -17,14 +17,16 @@ public class Buddies {
     private int health;
     private int attack;
     private int defense;
+    private int exp;
     private String imageSource;
     private boolean isStarter;
 
-    public Buddies(String name, int health, int attack, int defense, String imageResource){
+    public Buddies(String name, int health, int attack, int defense, int exp, String imageResource){
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.defense = defense;
+        this.exp = exp;
         this.imageSource = imageResource;
         isStarter = false;
     }
@@ -40,6 +42,7 @@ public class Buddies {
                 ", health=" + health +
                 ", attack=" + attack +
                 ", defense=" + defense +
+                ", exp=" + exp +
                 ", isStarter=" + isStarter +
                 '}';
     }
@@ -49,12 +52,12 @@ public class Buddies {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Buddies buddies = (Buddies) o;
-        return id == buddies.id && health == buddies.health && attack == buddies.attack && defense == buddies.defense && isStarter == buddies.isStarter && imageSource.equals(buddies.imageSource) && Objects.equals(name, buddies.name);
+        return id == buddies.id && health == buddies.health && attack == buddies.attack && defense == buddies.defense && exp == buddies.exp && isStarter == buddies.isStarter && Objects.equals(name, buddies.name) && Objects.equals(imageSource, buddies.imageSource);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, health, attack, defense, isStarter, imageSource);
+        return Objects.hash(id, name, health, attack, defense, exp, imageSource, isStarter);
     }
 
     public int getId() {
@@ -97,12 +100,12 @@ public class Buddies {
         this.defense = defense;
     }
 
-    public boolean isStarter() {
-        return isStarter;
+    public int getExp() {
+        return exp;
     }
 
-    public void setStarter(boolean starter) {
-        isStarter = starter;
+    public void setExp(int exp) {
+        this.exp = exp;
     }
 
     public String getImageSource() {
@@ -111,5 +114,13 @@ public class Buddies {
 
     public void setImageSource(String imageSource) {
         this.imageSource = imageSource;
+    }
+
+    public boolean isStarter() {
+        return isStarter;
+    }
+
+    public void setStarter(boolean starter) {
+        isStarter = starter;
     }
 }

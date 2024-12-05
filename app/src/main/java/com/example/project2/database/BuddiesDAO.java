@@ -32,8 +32,8 @@ public interface BuddiesDAO {
     @Query("SELECT * FROM " + CreatureBuddyDatabase.BuddiesTable + " WHERE id == :buddiesId")
     LiveData<Buddies> getBuddiesById(int buddiesId);
 
-    @Query("UPDATE " + CreatureBuddyDatabase.BuddiesTable + " SET name = :newName, health = :newHealth, attack = :newAttack, defense = :newDefense, imageSource = :newImage WHERE id = :buddiesId")
-    void updateBuddies(int buddiesId, String newName, int newHealth, int newAttack, int newDefense, String newImage);
+    @Query("UPDATE " + CreatureBuddyDatabase.BuddiesTable + " SET name = :newName, health = :newHealth, attack = :newAttack, defense = :newDefense, exp = :newExp, imageSource = :newImage WHERE id = :buddiesId")
+    void updateBuddies(int buddiesId, String newName, int newHealth, int newAttack, int newDefense, int newExp, String newImage);
 
     @Query("DELETE FROM " + CreatureBuddyDatabase.BuddiesTable + " WHERE id == :buddiesId")
     void deleteBuddies(int buddiesId);

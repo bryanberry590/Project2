@@ -63,10 +63,10 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
 
                 BuddiesDAO dao2 = INSTANCE.buddiesDAO();
                 dao2.deleteAll();
-                Buddies testBuddy1 = new Buddies("testBuddy1", 10, 100, 10, "@drawable/mewtwo");
+                Buddies testBuddy1 = new Buddies("testBuddy1", 10, 100, 10, 0, "@drawable/mewtwo");
                 testBuddy1.setStarter(true);
                 dao2.insert(testBuddy1);
-                Buddies testBuddy2 = new Buddies("testBuddy2", 1, 400, 20, "@drawable/bulbasaur");
+                Buddies testBuddy2 = new Buddies("testBuddy2", 1, 400, 20, 0, "@drawable/bulbasaur");
                 dao2.insert(testBuddy2);
             });
         }
