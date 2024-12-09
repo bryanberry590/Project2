@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".CharacterInformation" />
 
     </application>
 
