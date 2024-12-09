@@ -10,8 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.example.project2.database.entities.Buddies;
 import com.example.project2.databinding.ActivityMainBinding;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,27 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         repository = CreatureBuddyRepository.getRepository(getApplication());
+
+        //fetch the first 3 creaturebuddies
+        LiveData<Buddies> buddy1LiveData = repository.getBuddiesById(1);
+        LiveData<Buddies> buddy2LiveData = repository.getBuddiesById(2);
+        LiveData<Buddies> buddy3LiveData = repository.getBuddiesById(3);
+
+        /*Add in Oncreate() funtion after setContentView()*/
+        ImageButton creature1ImageButton = (ImageButton)findViewById(R.id.creature1);
+        //creature1ImageButton.setImageResource(R.drawable.breloom); //set the image programmatically
+
+        ImageButton creature2ImageButton = (ImageButton)findViewById(R.id.creature2);
+        //creature2ImageButton.setImageResource(R.drawable.bulbasaur); //set the image programmatically
+
+        ImageButton creature3ImageButton = (ImageButton)findViewById(R.id.creature3);
+        //creature3ImageButton.setImageResource(R.drawable.charizard); //set the image programmatically
+
+        buddyObserver(buddy1LiveData, creature1ImageButton);
+        buddyObserver(buddy2LiveData, creature2ImageButton);
+        buddyObserver(buddy3LiveData, creature3ImageButton);
+
+
         loginUser(savedInstanceState);
         if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntent(getApplicationContext());
@@ -84,6 +107,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void buddyObserver(LiveData<Buddies> buddy, ImageButton creatureBtn){
+        buddy.observe(this, currBuddy -> {
+            if(currBuddy != null){
+                creatureBtn.setImageResource(
+                        getResources().getIdentifier(currBuddy.getImageSource(), "drawable", getPackageName())
+                );
+            }
+        });
+    }
+
 
     static Intent mainActivityIntent(Context context, int userId) {
         Intent intent = new Intent(context, MainActivity.class);
