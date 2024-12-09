@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You selected creature 1", Toast.LENGTH_SHORT).show();
+                Intent newIntent = characterInfoIntent(getApplicationContext());
+                startActivity(newIntent);
             }
         });
 
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You selected creature 2", Toast.LENGTH_SHORT).show();
+                Intent newIntent = characterInfoIntent(getApplicationContext());
+                startActivity(newIntent);
             }
         });
 
@@ -74,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You selected creature 3", Toast.LENGTH_SHORT).show();
+                Intent newIntent = characterInfoIntent(getApplicationContext());
+                startActivity(newIntent);
             }
         });
     }
@@ -188,5 +195,9 @@ public class MainActivity extends AppCompatActivity {
 
     static Intent profileIntent(Context context) {
         return new Intent(context, ProfileActivity.class);
+    }
+
+    static Intent characterInfoIntent(Context context) {
+        return new Intent(context, CharacterInformation.class);
     }
 }
