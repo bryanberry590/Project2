@@ -4,7 +4,6 @@ package com.example.project2;
 import static com.example.project2.MainActivity.characterInfoIntent;
 import static com.example.project2.MainActivity.mainActivityIntent;
 
-import ;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,14 +19,13 @@ import com.example.project2.database.CreatureBuddyRepository;
 import com.example.project2.database.entities.Buddies;
 
 public class Battle extends AppCompatActivity {
-    private static int  MAIN_ACTIVITY_USER_ID;
+    /*private static int  MAIN_ACTIVITY_USER_ID;
     static final String SHARED_PREFERENCE_USERID_KEY = "com.example.project2.SHARED_PREFERENCE_USERID_KEY";
     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(String.valueOf(MAIN_ACTIVITY_USER_ID),
-            Context.MODE_PRIVATE); // making it private makes it only accessible by the app and not system wide
-    private BattleBinding binding;
+            Context.MODE_PRIVATE);
     int userId = sharedPreferences.getInt(ProfileActivity.SHARED_PREFERENCE_USERID_KEY, -1);
-    private int userID= sharedPreferences.getInt(String.valueOf(MAIN_ACTIVITY_USER_ID), -1);
-    private CreatureBuddyRepository repository;
+    private CreatureBuddyRepository repository;*/
+    private BattleBinding binding;
     public boolean playerIsDefending = false;
     public boolean enemyIsDefending = false;
     //id, name, health, attack, defense, exp, imageSource, isStarter
@@ -56,6 +54,7 @@ public class Battle extends AppCompatActivity {
         });
         binding.Defend.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                Toast.makeText(Battle.this, player.getName() + " is defending!", Toast.LENGTH_SHORT).show();
                 playerIsDefending = true;
                 enemyIsDefending = false;
                 enemyTurnBegin(enemy, player);
@@ -64,11 +63,16 @@ public class Battle extends AppCompatActivity {
     }
 
     public void attack(Buddies attacker, Buddies defender) {
+        int damage;
         if (playerIsDefending || enemyIsDefending) {
-            defender.setHealth(defender.getHealth() - attacker.getAttack() - 2 * defender.getDefense());
+            damage = attacker.getAttack() - 2 * defender.getDefense();
+            defender.setHealth(defender.getHealth() -damage);
+
         } else {
-            defender.setHealth(defender.getHealth() - attacker.getAttack() - defender.getDefense());
+            damage = attacker.getAttack() - defender.getDefense();
+            defender.setHealth(defender.getHealth() - damage);
         }
+        Toast.makeText(Battle.this, defender.getName()+" took " + damage + " damage!", Toast.LENGTH_SHORT).show();
     }
 
     public void enemyTurnBegin(Buddies enemy, Buddies player) {
@@ -79,6 +83,7 @@ public class Battle extends AppCompatActivity {
                 playerLose();
             }
         } else {
+            Toast.makeText(Battle.this, enemy.getName() + " is defending!", Toast.LENGTH_SHORT).show();
             enemyIsDefending = true;
         }
         playerIsDefending = false;
@@ -92,12 +97,8 @@ public class Battle extends AppCompatActivity {
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
         enemy.setHealth(enemyHp);
-        Intent newIntent = mainActivityIntent(getApplicationContext(),userID);
+        Intent newIntent = mainActivityIntent(getApplicationContext(),4);
         startActivity(newIntent);
     }
-    static Intent battleIntent(Context context, int userID) {
-        Intent intent = new Intent(context,Battle.class);
-        intent.putExtra(MAIN_ACTIVITY_USER_ID, userID);
-        return intent;
-    }
+
 }

@@ -1,5 +1,7 @@
 package com.example.project2;
 
+import static com.example.project2.MainActivity.mainActivityIntent;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,5 +21,15 @@ public class CharacterInformation extends AppCompatActivity{
         setContentView(R.layout.character_information);
         binding = CharacterInformationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = battleIntent(getApplicationContext());
+                startActivity(newIntent);
+            }
+        });
+    }
+    static Intent battleIntent(Context context) {
+        return new Intent(context, Battle.class);
     }
 }
