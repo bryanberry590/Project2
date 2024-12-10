@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Project_2";
     private int loggedInUserId = -1;
     private User user;
+    private int clickedBuddyId;
 
     private ActivityMainBinding binding;
     @Override
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         LiveData<Buddies> buddy1LiveData = repository.getBuddiesById(1);
         LiveData<Buddies> buddy2LiveData = repository.getBuddiesById(2);
         LiveData<Buddies> buddy3LiveData = repository.getBuddiesById(3);
+        //System.out.println("Buddy 1 live data is : " + buddy1LiveData.toString());
 
         /*Add in Oncreate() funtion after setContentView()*/
         ImageButton creature1ImageButton = (ImageButton)findViewById(R.id.creature1);
@@ -60,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         ImageButton creature3ImageButton = (ImageButton)findViewById(R.id.creature3);
         //creature3ImageButton.setImageResource(R.drawable.charizard); //set the image programmatically
 
-        buddyObserver(buddy1LiveData, creature1ImageButton);
-        buddyObserver(buddy2LiveData, creature2ImageButton);
-        buddyObserver(buddy3LiveData, creature3ImageButton);
+        buddyImgObserver(buddy1LiveData, creature1ImageButton);
+        buddyImgObserver(buddy2LiveData, creature2ImageButton);
+        buddyImgObserver(buddy3LiveData, creature3ImageButton);
 
 
         loginUser(savedInstanceState);
@@ -83,32 +85,42 @@ public class MainActivity extends AppCompatActivity {
         binding.creature1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "You selected creature 1", Toast.LENGTH_SHORT).show();
-                Intent newIntent = characterInfoIntent(getApplicationContext());
-                startActivity(newIntent);
+                //Toast.makeText(MainActivity.this, "You selected creature 1", Toast.LENGTH_SHORT).show();
+                passIdForBuddy(buddy1LiveData);
             }
         });
 
         binding.creature2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "You selected creature 2", Toast.LENGTH_SHORT).show();
-                Intent newIntent = characterInfoIntent(getApplicationContext());
-                startActivity(newIntent);
+                //Toast.makeText(MainActivity.this, "You selected creature 2", Toast.LENGTH_SHORT).show();
+                passIdForBuddy(buddy2LiveData);
             }
         });
 
         binding.creature3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "You selected creature 3", Toast.LENGTH_SHORT).show();
-                Intent newIntent = characterInfoIntent(getApplicationContext());
+                //Toast.makeText(MainActivity.this, "You selected creature 3", Toast.LENGTH_SHORT).show();
+                passIdForBuddy(buddy3LiveData);
+            }
+        });
+    }
+
+    private void passIdForBuddy(LiveData<Buddies> buddy){
+        buddy.observe(this, currBuddy -> {
+            if(currBuddy != null) {
+                clickedBuddyId = currBuddy.getId();
+                //now pass the id to the character info activity
+                Toast.makeText(MainActivity.this, "You selected creature " + clickedBuddyId, Toast.LENGTH_SHORT).show();
+                Intent newIntent = characterInfoIntent(getApplicationContext(), clickedBuddyId, loggedInUserId);
+                //newIntent.putExtra("BUDDY_ID", clickedBuddyId);
                 startActivity(newIntent);
             }
         });
     }
 
-    private void buddyObserver(LiveData<Buddies> buddy, ImageButton creatureBtn){
+    private void buddyImgObserver(LiveData<Buddies> buddy, ImageButton creatureBtn){
         buddy.observe(this, currBuddy -> {
             if(currBuddy != null){
                 creatureBtn.setImageResource(
@@ -146,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String text = binding.welcomeMessage.getText().toString().toUpperCase() + " " + user.getUsername().toUpperCase();
                 binding.welcomeMessage.setText(text);
-                System.out.println("The new user is: " + this.user);
+                //System.out.println("The new user is: " + this.user);
                 if(loggedInUserId == 1){
                     binding.hiddenBtn.setVisibility(View.VISIBLE);
                 } else {
@@ -231,7 +243,10 @@ public class MainActivity extends AppCompatActivity {
         return new Intent(context, ProfileActivity.class);
     }
 
-    static Intent characterInfoIntent(Context context) {
-        return new Intent(context, CharacterInformation.class);
+    static Intent characterInfoIntent(Context context, int clickedBuddyId, int userId) {
+        Intent intent = new Intent(context, CharacterInformation.class);
+        intent.putExtra("BUDDY_ID", clickedBuddyId);
+        intent.putExtra("USER_ID", userId);
+        return intent;
     }
 }

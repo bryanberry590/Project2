@@ -110,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity{
     }
 
     static Intent loginIntent(Context context) {
-        return new Intent(context, LoginActivity.class); //TODO: change to profileActivity.class
+        return new Intent(context, LoginActivity.class);
     }
 
     static Intent profileIntent(Context context) {
