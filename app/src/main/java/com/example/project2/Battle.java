@@ -1,7 +1,13 @@
 package com.example.project2;
 
+
+import static com.example.project2.MainActivity.characterInfoIntent;
+import static com.example.project2.MainActivity.mainActivityIntent;
+
+import ;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -14,7 +20,13 @@ import com.example.project2.database.CreatureBuddyRepository;
 import com.example.project2.database.entities.Buddies;
 
 public class Battle extends AppCompatActivity {
+    private static int  MAIN_ACTIVITY_USER_ID;
+    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.project2.SHARED_PREFERENCE_USERID_KEY";
+    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(String.valueOf(MAIN_ACTIVITY_USER_ID),
+            Context.MODE_PRIVATE); // making it private makes it only accessible by the app and not system wide
     private BattleBinding binding;
+    int userId = sharedPreferences.getInt(ProfileActivity.SHARED_PREFERENCE_USERID_KEY, -1);
+    private int userID= sharedPreferences.getInt(String.valueOf(MAIN_ACTIVITY_USER_ID), -1);
     private CreatureBuddyRepository repository;
     public boolean playerIsDefending = false;
     public boolean enemyIsDefending = false;
@@ -74,15 +86,18 @@ public class Battle extends AppCompatActivity {
     public void playerWin(){
         Toast.makeText(Battle.this, "You WON", Toast.LENGTH_SHORT).show();
         player.setHealth(playerHp);
+        Intent newIntent = characterInfoIntent(getApplicationContext());
+        startActivity(newIntent);
     }
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
         enemy.setHealth(enemyHp);
-
+        Intent newIntent = mainActivityIntent(getApplicationContext(),userID);
+        startActivity(newIntent);
     }
-    static Intent battleIntent(Context context) {
+    static Intent battleIntent(Context context, int userID) {
         Intent intent = new Intent(context,Battle.class);
-        //intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+        intent.putExtra(MAIN_ACTIVITY_USER_ID, userID);
         return intent;
     }
 }
