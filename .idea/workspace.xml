@@ -5,11 +5,6 @@
       <config />
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-        <config>
-          <theme>@style/Theme.AppCompat.DayNight.DarkActionBar</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/battle.xml">
         <config>
           <theme>@style/Theme.AppCompat.DayNight.DarkActionBar</theme>
@@ -31,7 +26,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb3b06f8-908e-4eb6-8ca3-fdbc91d02a11" name="Changes" comment="" />
+    <list default="true" id="bb3b06f8-908e-4eb6-8ca3-fdbc91d02a11" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/Project2.app.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Project2.app.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +92,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Bryan" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,7 +128,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "#9 on main",
+    "git-widget-placeholder": "Bryan",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/bryanberry/Desktop/CSUMB/cst338/Project2",
     "project.structure.last.edited": "Modules",
