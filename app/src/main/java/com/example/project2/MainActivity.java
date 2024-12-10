@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
-
+                Intent intent = adminActivityIntent(getApplicationContext());
+                startActivity(intent);
             }
         });
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int getRandomNum(int param1, int param2, int param3){
-        int randomInt = (int)(Math.random() * 10 + 1);
+        int randomInt = (int)(Math.random() * 9 + 1);
         while(randomInt == param1 || randomInt == param2 || randomInt == param3){
             randomInt = (int)(Math.random() * 9 + 1);
         }
@@ -143,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
     static Intent mainActivityIntent(Context context, int userId) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+        return intent;
+    }
+
+    static Intent adminActivityIntent(Context context) {
+        Intent intent = new Intent(context, AdminActivity.class);
         return intent;
     }
 

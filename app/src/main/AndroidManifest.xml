@@ -27,6 +27,9 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CharacterInformation" />
+        <activity android:name=".AdminActivity"/>
+        <activity android:name=".EditCreatureBuddyActivity"/>
+        <activity android:name=".SelectCreatureBuddyActivity"/>
 
     </application>
 
