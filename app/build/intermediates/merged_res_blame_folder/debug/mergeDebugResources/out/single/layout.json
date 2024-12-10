@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/activity_profile.xml",
+        "source": "com.example.project2.app-main-36:/layout/activity_profile.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/battle.xml",
+        "source": "com.example.project2.app-main-36:/layout/battle.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/edit_creature_buddy.xml",
+        "source": "com.example.project2.app-main-36:/layout/edit_creature_buddy.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/character_information.xml",
+        "source": "com.example.project2.app-main-36:/layout/character_information.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/activity_login.xml",
+        "source": "com.example.project2.app-main-36:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/activity_main.xml",
+        "source": "com.example.project2.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/admin_select_starters.xml",
+        "source": "com.example.project2.app-main-36:/layout/admin_select_starters.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/signup.xml",
+        "source": "com.example.project2.app-main-36:/layout/signup.xml"
+    },
+    {
+        "merged": "com.example.project2.app-mergeDebugResources-33:/layout/admin_welcome.xml",
+        "source": "com.example.project2.app-main-36:/layout/admin_welcome.xml"
+    }
+]

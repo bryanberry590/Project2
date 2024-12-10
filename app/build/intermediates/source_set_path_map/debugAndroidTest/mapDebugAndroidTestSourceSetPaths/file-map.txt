@@ -1,0 +1,5 @@
+com.example.project2.test.app-core-1.6.1-0 /Users/bryanberry/.gradle/caches/transforms-4/30c711544809a83387dd7cdf75494796/transformed/core-1.6.1/res
+com.example.project2.test.app-androidTest-1 /Users/bryanberry/Desktop/CSUMB/cst338/Project2/app/build/generated/res/resValues/androidTest/debug
+com.example.project2.test.app-mergeDebugAndroidTestResources-2 /Users/bryanberry/Desktop/CSUMB/cst338/Project2/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
+com.example.project2.test.app-mergeDebugAndroidTestResources-3 /Users/bryanberry/Desktop/CSUMB/cst338/Project2/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
+com.example.project2.test.app-debugAndroidTest-4 /Users/bryanberry/Desktop/CSUMB/cst338/Project2/app/build/intermediates/merged_res/debugAndroidTest/mergeDebugAndroidTestResources
