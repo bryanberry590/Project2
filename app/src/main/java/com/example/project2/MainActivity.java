@@ -1,5 +1,6 @@
 package com.example.project2;
 
+import java.util.Random;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -47,9 +48,14 @@ public class MainActivity extends AppCompatActivity {
         repository = CreatureBuddyRepository.getRepository(getApplication());
 
         //fetch the first 3 creaturebuddies
-        LiveData<Buddies> buddy1LiveData = repository.getBuddiesById(1);
-        LiveData<Buddies> buddy2LiveData = repository.getBuddiesById(2);
-        LiveData<Buddies> buddy3LiveData = repository.getBuddiesById(3);
+        int rand1 = getRandomNum(0, 0, 0);
+        int rand2 = getRandomNum(rand1, 0, 0);
+        int rand3 = getRandomNum(rand1, rand2, 0);
+        Log.d("RANDOM BUDDY NUMBER GENERATOR", "Rand numbers are " + rand1 + ", " + rand2 + ", " + rand3);
+
+        LiveData<Buddies> buddy1LiveData = repository.getBuddiesById(rand1);
+        LiveData<Buddies> buddy2LiveData = repository.getBuddiesById(rand2);
+        LiveData<Buddies> buddy3LiveData = repository.getBuddiesById(rand3);
         //System.out.println("Buddy 1 live data is : " + buddy1LiveData.toString());
 
         //Retrieves the Image Buttons by ID
@@ -103,6 +109,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private int getRandomNum(int param1, int param2, int param3){
+        int randomInt = (int)(Math.random() * 10 + 1);
+        while(randomInt == param1 || randomInt == param2 || randomInt == param3){
+            randomInt = (int)(Math.random() * 9 + 1);
+        }
+        return randomInt;
+    }
+
     private void passIdForBuddy(LiveData<Buddies> buddy){
         buddy.observe(this, currBuddy -> {
             if(currBuddy != null) {
@@ -110,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                 //now pass the id to the character info activity
                 Toast.makeText(MainActivity.this, "You selected creature " + clickedBuddyId, Toast.LENGTH_SHORT).show();
                 Intent newIntent = characterInfoIntent(getApplicationContext(), clickedBuddyId, loggedInUserId);
-                //newIntent.putExtra("BUDDY_ID", clickedBuddyId);
                 startActivity(newIntent);
             }
         });
