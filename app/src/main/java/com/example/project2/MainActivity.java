@@ -52,16 +52,12 @@ public class MainActivity extends AppCompatActivity {
         LiveData<Buddies> buddy3LiveData = repository.getBuddiesById(3);
         //System.out.println("Buddy 1 live data is : " + buddy1LiveData.toString());
 
-        /*Add in Oncreate() funtion after setContentView()*/
+        //Retrieves the Image Buttons by ID
         ImageButton creature1ImageButton = (ImageButton)findViewById(R.id.creature1);
-        //creature1ImageButton.setImageResource(R.drawable.breloom); //set the image programmatically
-
         ImageButton creature2ImageButton = (ImageButton)findViewById(R.id.creature2);
-        //creature2ImageButton.setImageResource(R.drawable.bulbasaur); //set the image programmatically
-
         ImageButton creature3ImageButton = (ImageButton)findViewById(R.id.creature3);
-        //creature3ImageButton.setImageResource(R.drawable.charizard); //set the image programmatically
 
+        //these 3 lines set each of the images for the buttons for the creature buddies
         buddyImgObserver(buddy1LiveData, creature1ImageButton);
         buddyImgObserver(buddy2LiveData, creature2ImageButton);
         buddyImgObserver(buddy3LiveData, creature3ImageButton);
