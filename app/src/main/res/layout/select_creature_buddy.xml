@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/editTextMessage"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:text="@string/edit_screen_message"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/Frame"
+        android:layout_width="250dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMessage">
+
+        <ExpandableListView
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            app:layout_constraintTop_toTopOf="@id/Frame"
+            tools:ignore="MissingConstraints" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/healthLabel"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/health"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/healthEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Frame" />
+
+    <EditText
+        android:id="@+id/healthEditText"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="28dp"
+        android:hint="@string/healthHint"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Frame" />
+
+    <TextView
+        android:id="@+id/attackLabel"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/attack_label"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/attackEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/healthLabel" />
+
+    <EditText
+        android:id="@+id/attackEditText"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="28dp"
+        android:hint="@string/attack_hint"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/healthEditText" />
+
+    <TextView
+        android:id="@+id/defenseLabel"
+        android:layout_width="125dp"
+        android:layout_height="52dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/defense_label"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toStartOf="@+id/defenseEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attackLabel" />
+
+    <EditText
+        android:id="@+id/defenseEditText"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="28dp"
+        android:hint="@string/defense"
+        android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/attackEditText" />
+
+    <ImageView
+        android:id="@+id/creatureImageBox"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/creature_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/defenseLabel"
+        android:src="@drawable/mewtwo"/>
+<!--   TODO: for imageView, if we want the image of a creature to appear there, we need "android:src="PATH", -->
+<!--        else we can remove the image view entirely and spread out the page elements -->
+
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_margin="20dp"
+        android:text="@string/submit_changes"
+        android:textSize="32sp"
+        android:id="@+id/submitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/creatureImageBox" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

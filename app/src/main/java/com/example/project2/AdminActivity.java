@@ -40,11 +40,11 @@ public class AdminActivity extends AppCompatActivity {
 
     // create intent factories
     static Intent editCreatureBuddyIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, EditCreatureBuddyActivity.class);
         return intent;
     }
     static Intent selectStartersIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, SelectCreatureBuddyActivity.class);
         return intent;
     }
 
