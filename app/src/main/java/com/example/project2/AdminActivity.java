@@ -1,13 +1,12 @@
 package com.example.project2;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AdminActivity extends AppCompatActivity {
+public class adminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,8 +21,8 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Redirect to EditCreatureBuddyActivity
-                Intent newIntent = editCreatureBuddyIntent(getApplicationContext());
-                startActivity(newIntent);
+                Intent intent = new Intent(adminActivity.this, editCreatureBuddyActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -32,20 +31,9 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Redirect to SelectCreatureBuddyActivity
-                Intent newIntent = selectStartersIntent(getApplicationContext());
-                startActivity(newIntent);
+                Intent intent = new Intent(adminActivity.this, selectCreatureBuddyActivity.class);
+                startActivity(intent);
             }
         });
     }
-
-    // create intent factories
-    static Intent editCreatureBuddyIntent(Context context) {
-        Intent intent = new Intent(context, EditCreatureBuddyActivity.class);
-        return intent;
-    }
-    static Intent selectStartersIntent(Context context) {
-        Intent intent = new Intent(context, SelectCreatureBuddyActivity.class);
-        return intent;
-    }
-
 }
