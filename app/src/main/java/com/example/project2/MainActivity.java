@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
-                Intent intent = adminActivityIntent(getApplicationContext());
+                Intent intent = adminActivityIntent(getApplicationContext(), loggedInUserId);
                 startActivity(intent);
             }
         });
@@ -147,8 +147,9 @@ public class MainActivity extends AppCompatActivity {
         return intent;
     }
 
-    static Intent adminActivityIntent(Context context) {
+    static Intent adminActivityIntent(Context context, int userId) {
         Intent intent = new Intent(context, AdminActivity.class);
+        intent.putExtra("USER_ID", userId);
         return intent;
     }
 
@@ -156,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         //check shared reference for logged in user / Dr.C goes over this in video 11 @ around 22 min
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USERID_KEY,
                 Context.MODE_PRIVATE); // making it private makes it only accessible by the app and not system wide
+
         loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USERID_VALUE, LOGGED_OUT);
         if (loggedInUserId != LOGGED_OUT) {
             return;
