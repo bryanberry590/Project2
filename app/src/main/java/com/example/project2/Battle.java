@@ -25,28 +25,28 @@ import com.example.project2.database.CreatureBuddyRepository;
 import com.example.project2.database.entities.Buddies;
 
 public class Battle extends AppCompatActivity {
-    /*private static int  MAIN_ACTIVITY_USER_ID;
-    static final String SHARED_PREFERENCE_USERID_KEY = "com.example.project2.SHARED_PREFERENCE_USERID_KEY";
-    SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(String.valueOf(MAIN_ACTIVITY_USER_ID),
-            Context.MODE_PRIVATE);
-    int userId = sharedPreferences.getInt(ProfileActivity.SHARED_PREFERENCE_USERID_KEY, -1);
-    private CreatureBuddyRepository repository;*/
+
     private BattleBinding binding;
-    public boolean playerIsDefending = false;
-    public boolean enemyIsDefending = false;
-    //Buddies player = new Buddies("test Player", 20, 5, 2, 0, "@drawable/bulbasaur");
-    //Buddies enemy = new Buddies("test Enemy", 15, 5, 2, 0, "@drawable/charizard");
+    private CreatureBuddyRepository repository;
+    private int currUserId;
+    private int buddyId;
+
+    // Remove these fields since they’re now in BattleLogic
+    // public boolean playerIsDefending = false;
+    // public boolean enemyIsDefending = false;
+
     private int playerHp;
     private int enemyHp;
 
-    private int currUserId;
-    private int buddyId;
-    private CreatureBuddyRepository repository;
     Buddies player;
     Buddies enemy;
+
     boolean playerLoaded = false;
     boolean enemyLoaded = false;
 
+    private BattleLogic battleLogic;
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
@@ -59,8 +59,6 @@ public class Battle extends AppCompatActivity {
 
         getPlayerBuddy(buddyId);
         getEnemyBuddy(getRandomNum());
-        //Log.d("BATTLE SCREEN", "BuddyId: " + buddyId + " UserId: " + currUserId);
-        //startPlayerTurn(binding);
     }
 
     private int getRandomNum(){
@@ -102,79 +100,61 @@ public class Battle extends AppCompatActivity {
 
     private void startBattleIfReady() {
         if (playerLoaded && enemyLoaded) {
-            startPlayerTurn(binding);
+            battleLogic = new BattleLogic(player, enemy);
+            startPlayerTurn();
         }
     }
 
-    public void startPlayerTurn(BattleBinding binding) {
-        binding.health2.setText(String.format("%d/%d", player.getHealth(), playerHp));
-        binding.health.setText(String.format("%d/%d", enemy.getHealth(), enemyHp));
-        binding.Attack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                attack(player, enemy);
-                enemyIsDefending = false;
-                if(enemy.getHealth() <= 0){
-                    playerWin();
+    public void startPlayerTurn() {
+        binding.health2.setText(String.format("%d/%d", battleLogic.getPlayerHealth(), battleLogic.getPlayerInitialHealth()));
+        binding.health.setText(String.format("%d/%d", battleLogic.getEnemyHealth(), battleLogic.getEnemyInitialHealth()));
+
+        binding.Attack.setOnClickListener(view -> {
+            int damage = battleLogic.attack(player, enemy);
+            battleLogic.setEnemyDefending(false);
+            Toast.makeText(Battle.this, enemy.getName()+" took " + damage + " damage!", Toast.LENGTH_SHORT).show();
+
+            if(battleLogic.isEnemyDead()){
+                playerWin();
+            } else {
+                // enemy turn
+                boolean playerDied = battleLogic.enemyTurn();
+                if (playerDied) {
+                    Toast.makeText(Battle.this, player.getName()+" took damage!", Toast.LENGTH_SHORT).show();
+                    playerLose();
+                } else {
+                    Toast.makeText(Battle.this, enemy.getName()+" took damage!", Toast.LENGTH_SHORT).show();
                 }
-                enemyTurnBegin(enemy, player, binding);
+                battleLogic.setPlayerDefending(false);
+                startPlayerTurn();
             }
         });
-        binding.Defend.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Toast.makeText(Battle.this, player.getName() + " is defending!", Toast.LENGTH_SHORT).show();
-                playerIsDefending = true;
-                enemyIsDefending = false;
-                enemyTurnBegin(enemy, player, binding);
-            }
-        });
-    }
 
-    public void attack(Buddies attacker, Buddies defender) {
-        int damage;
-        if (playerIsDefending || enemyIsDefending) {
-            damage = attacker.getAttack() - 2 * defender.getDefense();
-            if (damage<=0){
-                damage = 1;
-            }
-            defender.setHealth(defender.getHealth() -damage);
+        binding.Defend.setOnClickListener(view -> {
+            Toast.makeText(Battle.this, player.getName() + " is defending!", Toast.LENGTH_SHORT).show();
+            battleLogic.setPlayerDefending(true);
+            battleLogic.setEnemyDefending(false);
 
-        } else {
-            damage = attacker.getAttack() - defender.getDefense();
-            if (damage<=0){
-                damage = 1;
-            }
-            defender.setHealth(defender.getHealth() - damage);
-            if (defender.getHealth()<0){
-                defender.setHealth(0);
-            }
-        }
-        Toast.makeText(Battle.this, defender.getName()+" took " + damage + " damage!", Toast.LENGTH_SHORT).show();
-    }
-
-    public void enemyTurnBegin(Buddies enemy, Buddies player, BattleBinding binding) {
-        int choice = (int) (Math.random() * 4 + 1);
-        if (choice <= 3) {
-            attack(enemy, player);
-            if(player.getHealth() <= 0){
+            boolean playerDied = battleLogic.enemyTurn();
+            if (playerDied) {
                 playerLose();
             }
-        } else {
-            Toast.makeText(Battle.this, enemy.getName() + " is defending!", Toast.LENGTH_SHORT).show();
-            enemyIsDefending = true;
-        }
-        playerIsDefending = false;
-        startPlayerTurn(binding);
+            battleLogic.setPlayerDefending(false);
+            startPlayerTurn();
+        });
     }
+
     public void playerWin(){
         Toast.makeText(Battle.this, "You WON", Toast.LENGTH_SHORT).show();
-        player.setHealth(playerHp);
+        battleLogic.resetPlayerHealth();
         repository.incrementWins(buddyId);
         Intent newIntent = mainActivityIntent(getApplicationContext(), buddyId, currUserId);
         startActivity(newIntent);
     }
+
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
-        enemy.setHealth(enemyHp);
+        battleLogic.resetEnemyHealth();
         repository.incrementLosses(buddyId);
         Intent newIntent = mainActivityIntent(getApplicationContext(), buddyId, currUserId);
         startActivity(newIntent);
