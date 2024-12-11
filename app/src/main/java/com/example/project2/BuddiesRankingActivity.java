@@ -59,35 +59,5 @@ public class BuddiesRankingActivity extends AppCompatActivity {
             adapter.setBuddies(buddiesMap);
         });
 
-        // Set up test buttons
-        binding.addWinButton.setOnClickListener(v -> {
-            try {
-                String buddyIdStr = binding.buddyIdInput.getText().toString();
-                if (!buddyIdStr.isEmpty()) {
-                    int buddyId = Integer.parseInt(buddyIdStr);
-                    viewModel.incrementWins(buddyId);
-                    Toast.makeText(this, "Added win for Buddy " + buddyId, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Please enter a Buddy ID", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                Toast.makeText(this, "Error updating wins: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        binding.addLossButton.setOnClickListener(v -> {
-            try {
-                String buddyIdStr = binding.buddyIdInput.getText().toString();
-                if (!buddyIdStr.isEmpty()) {
-                    int buddyId = Integer.parseInt(buddyIdStr);
-                    viewModel.incrementLosses(buddyId);
-                    Toast.makeText(this, "Added loss for Buddy " + buddyId, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Please enter a Buddy ID", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                Toast.makeText(this, "Error updating losses: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }

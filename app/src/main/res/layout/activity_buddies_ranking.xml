@@ -49,27 +49,6 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <EditText
-            android:id="@+id/buddyIdInput"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Buddy ID"
-            android:inputType="number"
-            android:layout_marginEnd="8dp"/>
-
-        <Button
-            android:id="@+id/addWinButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Win"
-            android:layout_marginEnd="8dp"/>
-
-        <Button
-            android:id="@+id/addLossButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loss"/>
 
     </LinearLayout>
 
