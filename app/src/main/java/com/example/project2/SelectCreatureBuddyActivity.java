@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.project2.database.CreatureBuddyRepository;
+import com.example.project2.database.entities.User;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,10 +16,14 @@ import androidx.lifecycle.LiveData;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
-import com.example.project2.database.CreatureBuddyRepository;
-import com.example.project2.database.entities.User;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class AdminActivity extends AppCompatActivity {
+import com.example.project2.databinding.SelectCreatureBuddyBinding;
+
+
+public class SelectCreatureBuddyActivity extends AppCompatActivity {
+    private SelectCreatureBuddyBinding binding;
+
 
 
     private int loggedInUserId = -1;
@@ -36,47 +40,36 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_welcome);
+        setContentView(R.layout.select_creature_buddy);
+        binding = SelectCreatureBuddyBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        repository = CreatureBuddyRepository.getRepository(getApplication());
 
         currUserId = getIntent().getIntExtra("USER_ID", -1);
-        repository = CreatureBuddyRepository.getRepository(getApplication());
+
         loginUser(savedInstanceState);
 
+        Log.d("SELECT SCREEN LOGGED IN USER ID", "LOGGED IN USER ID IN SELECT SCREEN IS " + currUserId);
+        int selectedStarter1 = 1;
+        int selectedStarter2 = 2;
+        int selectedStarter3 = 3;
 
-        // Initialize buttons
-        Button editBaseStatButton = findViewById(R.id.editBaseStat);
-        Button selectStarterButton = findViewById(R.id.selectStarter);
-
-        // Set click listener for editBaseStat button
-        editBaseStatButton.setOnClickListener(new View.OnClickListener() {
+        binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Redirect to EditCreatureBuddyActivity
-                Intent newIntent = editCreatureBuddyIntent(getApplicationContext(), currUserId);
-                startActivity(newIntent);
+            public void onClick(View view) {
+                Intent intent = mainActivityIntent(getApplicationContext(), selectedStarter1, selectedStarter2, selectedStarter3, currUserId);
+                startActivity(intent);
             }
         });
 
-        // Set click listener for selectStarter button
-        selectStarterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Redirect to SelectCreatureBuddyActivity
-                Intent newIntent = selectStartersIntent(getApplicationContext(), currUserId);
-                startActivity(newIntent);
-            }
-        });
     }
 
-    // create intent factories
-    static Intent editCreatureBuddyIntent(Context context, int userId) {
-        Intent intent = new Intent(context, EditCreatureBuddyActivity.class);
-        intent.putExtra("USER_ID", userId);
-        return intent;
-    }
-    static Intent selectStartersIntent(Context context, int userId) {
-        Intent intent = new Intent(context, SelectCreatureBuddyActivity.class);
-        intent.putExtra("USER_ID", userId);
+    static Intent mainActivityIntent(Context context, int id1, int id2, int id3, int userId) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("STARTER1", id1);
+        intent.putExtra("STARTER2", id2);
+        intent.putExtra("STARTER3", id3);
+        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
 
@@ -134,7 +127,7 @@ public class AdminActivity extends AppCompatActivity {
 
     // from alert_dialog slides on canvas
     private void showLogoutDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(AdminActivity.this); //TODO: change to currentClass.this
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SelectCreatureBuddyActivity.this); //TODO: change to currentClass.this
         final AlertDialog alertDialog = alertBuilder.create();
 
 
@@ -169,6 +162,5 @@ public class AdminActivity extends AppCompatActivity {
     static Intent profileIntent(Context context) {
         return new Intent(context, ProfileActivity.class);
     }
-
 
 }
