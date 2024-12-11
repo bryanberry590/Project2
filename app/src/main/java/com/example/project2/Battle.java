@@ -7,9 +7,11 @@ import static com.example.project2.MainActivity.mainActivityIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,21 +29,28 @@ public class Battle extends AppCompatActivity {
     private BattleBinding binding;
     public boolean playerIsDefending = false;
     public boolean enemyIsDefending = false;
-    //id, name, health, attack, defense, exp, imageSource, isStarter
-    Buddies player = new Buddies("test Player", 20, 5, 4, 0, "@drawable/bulbasaur");
-    Buddies enemy = new Buddies("test Enemy", 15, 3, 2, 0, "@drawable/charizard");
-    private int playerHp = player.getHealth();
-    private int enemyHp = enemy.getHealth();
+    Buddies player = new Buddies("test Player", 20, 5, 2, 0, "@drawable/bulbasaur");
+    Buddies enemy = new Buddies("test Enemy", 15, 5, 2, 0, "@drawable/charizard");
+    private final int playerHp = player.getHealth();
+    private final int enemyHp = enemy.getHealth();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
         binding = BattleBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.character2.setImageResource(
+                getResources().getIdentifier(player.getImageSource(), "drawable", getPackageName())
+        );
+        binding.character1.setImageResource(
+                getResources().getIdentifier(enemy.getImageSource(), "drawable", getPackageName())
+        );
         startPlayerTurn(binding);
     }
 
     public void startPlayerTurn(BattleBinding binding) {
+        binding.health2.setText(String.format("%d/%d", player.getHealth(), playerHp));
+        binding.health.setText(String.format("%d/%d", enemy.getHealth(), enemyHp));
         binding.Attack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 attack(player, enemy);
@@ -49,7 +58,7 @@ public class Battle extends AppCompatActivity {
                 if(enemy.getHealth() <= 0){
                     playerWin();
                 }
-                enemyTurnBegin(enemy, player);
+                enemyTurnBegin(enemy, player, binding);
             }
         });
         binding.Defend.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +66,7 @@ public class Battle extends AppCompatActivity {
                 Toast.makeText(Battle.this, player.getName() + " is defending!", Toast.LENGTH_SHORT).show();
                 playerIsDefending = true;
                 enemyIsDefending = false;
-                enemyTurnBegin(enemy, player);
+                enemyTurnBegin(enemy, player, binding);
             }
         });
     }
@@ -66,18 +75,27 @@ public class Battle extends AppCompatActivity {
         int damage;
         if (playerIsDefending || enemyIsDefending) {
             damage = attacker.getAttack() - 2 * defender.getDefense();
+            if (damage<=0){
+                damage = 1;
+            }
             defender.setHealth(defender.getHealth() -damage);
 
         } else {
             damage = attacker.getAttack() - defender.getDefense();
+            if (damage<=0){
+                damage = 1;
+            }
             defender.setHealth(defender.getHealth() - damage);
+            if (defender.getHealth()<0){
+                defender.setHealth(0);
+            }
         }
         Toast.makeText(Battle.this, defender.getName()+" took " + damage + " damage!", Toast.LENGTH_SHORT).show();
     }
 
-    public void enemyTurnBegin(Buddies enemy, Buddies player) {
+    public void enemyTurnBegin(Buddies enemy, Buddies player, BattleBinding binding) {
         int choice = (int) (Math.random() * 4 + 1);
-        if (choice < 3) {
+        if (choice <= 3) {
             attack(enemy, player);
             if(player.getHealth() <= 0){
                 playerLose();
@@ -87,28 +105,19 @@ public class Battle extends AppCompatActivity {
             enemyIsDefending = true;
         }
         playerIsDefending = false;
+        startPlayerTurn(binding);
     }
     public void playerWin(){
         Toast.makeText(Battle.this, "You WON", Toast.LENGTH_SHORT).show();
         player.setHealth(playerHp);
-        Intent newIntent = characterInfoIntent(getApplicationContext());
+        Intent newIntent = characterInfoIntent(getApplicationContext(), 4, 4);
         startActivity(newIntent);
     }
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
         enemy.setHealth(enemyHp);
-        Intent newIntent = mainActivityIntent(getApplicationContext()); // there was a 4 hereafter the getAppContext()
+        Intent newIntent = mainActivityIntent(getApplicationContext(),4);
         startActivity(newIntent);
-    }
-
-    static Intent mainActivityIntent(Context context) {
-        Intent intent = new Intent(context, MainActivity.class);
-        return intent;
-    }
-
-    static Intent characterInfoIntent(Context context){
-        Intent intent = new Intent(context, CharacterInformation.class);
-        return intent;
     }
 
 }
