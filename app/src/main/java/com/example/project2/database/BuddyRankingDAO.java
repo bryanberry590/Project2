@@ -18,8 +18,14 @@ public interface BuddyRankingDAO {
     @Query("SELECT * FROM " + CreatureBuddyDatabase.BUDDY_RANKING_TABLE + " ORDER BY winPercentage DESC")
     LiveData<List<BuddyRanking>> getAllRankings();
 
+    @Query("SELECT * FROM " + CreatureBuddyDatabase.BUDDY_RANKING_TABLE + " ORDER BY winPercentage DESC")
+    List<BuddyRanking> getAllRankingsSync();
+
     @Query("SELECT * FROM " + CreatureBuddyDatabase.BUDDY_RANKING_TABLE + " WHERE buddyId = :buddyId")
     LiveData<BuddyRanking> getRankingByBuddyId(int buddyId);
+
+    @Query("SELECT * FROM " + CreatureBuddyDatabase.BUDDY_RANKING_TABLE + " WHERE buddyId = :buddyId")
+    BuddyRanking getRankingByBuddyIdSync(int buddyId);
 
     @Query("UPDATE " + CreatureBuddyDatabase.BUDDY_RANKING_TABLE + 
            " SET wins = wins + 1, " +
