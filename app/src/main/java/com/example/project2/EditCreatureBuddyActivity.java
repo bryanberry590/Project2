@@ -1,4 +1,3 @@
-
 package com.example.project2;
 
 import android.content.Context;
@@ -15,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.project2.database.CreatureBuddyRepository;
+import com.example.project2.database.entities.Buddies;
 import com.example.project2.database.entities.User;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.project2.database.entities.User;
 import com.example.project2.databinding.ActivityMainBinding;
 import com.example.project2.databinding.EditCreatureBuddyBinding;
-import com.example.project2.databinding.SelectCreatureBuddyBinding;
 
 public class EditCreatureBuddyActivity extends AppCompatActivity {
 
@@ -52,10 +52,34 @@ public class EditCreatureBuddyActivity extends AppCompatActivity {
         binding.submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String buddyStr = binding.BuddyId.getText().toString().trim();
+
+                String healthStr = binding.healthEditText.getText().toString().trim();
+                String attackStr = binding.attackEditText.getText().toString().trim();
+                String defenseStr = binding.defenseEditText.getText().toString().trim();
+
+                int buddyId = Integer.parseInt(buddyStr);
+                int health = Integer.parseInt(healthStr);
+                int attack = Integer.parseInt(attackStr);
+                int defense = Integer.parseInt(defenseStr);
+                //Log.d("UPDATE BUDDY STATS", "Health: " + health + " attack: " + attack + " defense: " + defense);
+                updateBuddy(health, attack, defense, buddyId);
+            }
+        });
+    }
+
+    private void updateBuddy(int health, int attack, int defense, int buddyId){
+        LiveData<Buddies> buddyObserver = repository.getBuddiesById(buddyId);
+        buddyObserver.observe(this, retrievedBuddy -> {
+            if (retrievedBuddy != null) {
+                repository.updateBuddies(buddyId, retrievedBuddy.getName(), health, attack, defense, retrievedBuddy.getExp(), retrievedBuddy.getImageSource());
+
                 Intent intent = mainActivityIntent(getApplicationContext(), currUserId);
                 startActivity(intent);
             }
         });
+
+
     }
 
     static Intent mainActivityIntent(Context context, int userId) {

@@ -45,7 +45,6 @@ public class AdminActivity extends AppCompatActivity {
 
         // Initialize buttons
         Button editBaseStatButton = findViewById(R.id.editBaseStat);
-        Button selectStarterButton = findViewById(R.id.selectStarter);
 
         // Set click listener for editBaseStat button
         editBaseStatButton.setOnClickListener(new View.OnClickListener() {
@@ -56,26 +55,11 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(newIntent);
             }
         });
-
-        // Set click listener for selectStarter button
-        selectStarterButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Redirect to SelectCreatureBuddyActivity
-                Intent newIntent = selectStartersIntent(getApplicationContext(), currUserId);
-                startActivity(newIntent);
-            }
-        });
     }
 
     // create intent factories
     static Intent editCreatureBuddyIntent(Context context, int userId) {
         Intent intent = new Intent(context, EditCreatureBuddyActivity.class);
-        intent.putExtra("USER_ID", userId);
-        return intent;
-    }
-    static Intent selectStartersIntent(Context context, int userId) {
-        Intent intent = new Intent(context, SelectCreatureBuddyActivity.class);
         intent.putExtra("USER_ID", userId);
         return intent;
     }
@@ -92,14 +76,12 @@ public class AdminActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.logout_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -116,7 +98,6 @@ public class AdminActivity extends AppCompatActivity {
                 return false;
             }
         });
-
 
         MenuItem profile = menu.findItem(R.id.profileMenuItem);
         profile.setVisible(true);
