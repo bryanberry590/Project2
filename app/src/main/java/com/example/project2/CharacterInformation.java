@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.project2.database.entities.Buddies;
 import com.example.project2.databinding.CharacterInformationBinding;
@@ -54,13 +55,19 @@ public class CharacterInformation extends AppCompatActivity{
         repository = CreatureBuddyRepository.getRepository(getApplication());
 
 
-        repository = CreatureBuddyRepository.getRepository(getApplication());
+        //repository = CreatureBuddyRepository.getRepository(getApplication());
 
         buddyId = getIntent().getIntExtra("BUDDY_ID", -1);
         currUserId = getIntent().getIntExtra("USER_ID", -1);
 //        Log.d("CharacterInformation", "Selected Buddy Id: " + buddyId);
 //        Log.d("CURRENT USER ID", "THE CURRENT USER ID IS: " + currUserId);
-        loginUser(savedInstanceState);
+        if(currUserId == -1) {
+            loginUser(savedInstanceState);
+        } else {
+            loggedInUserId = currUserId;
+            retrieveUser(loggedInUserId);
+        }
+
 
         LiveData<Buddies> selectedBuddyLiveData = repository.getBuddiesById(buddyId);
         setBuddyInfo(selectedBuddyLiveData, buddyId);
@@ -68,15 +75,29 @@ public class CharacterInformation extends AppCompatActivity{
         binding.playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newIntent = battleIntent(getApplicationContext());
+                Intent newIntent = battleIntent(getApplicationContext(), buddyId, currUserId);
                 startActivity(newIntent);
             }
         });
     }
 
-    static Intent battleIntent(Context context) {
+    private void retrieveUser(int currUserId){
+        LiveData<User> currUser = repository.getUserByUserId(currUserId);
+        currUser.observe(this, newUser -> {
+            if(newUser != null){
+                user = newUser;
+            } else {
+                Log.d("USER RETRIEVAL", "FAILED TO RETRIEVE USER");
+            }
+        });
+    }
+
+    static Intent battleIntent(Context context, int buddyId, int currUserId) {
         Intent intent = new Intent(context, Battle.class);
-        return intent;    }
+        intent.putExtra("BUDDY_ID", buddyId);
+        intent.putExtra("USER_ID", currUserId);
+        return intent;
+    }
 
     private void setBuddyInfo(LiveData<Buddies> selectedBuddy, int buddyId){
         TextView statView = (TextView)findViewById(R.id.statTextViewBox);

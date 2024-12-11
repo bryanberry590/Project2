@@ -9,12 +9,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
+import com.example.project2.database.CreatureBuddyRepository;
+import com.example.project2.database.entities.User;
 import com.example.project2.databinding.BattleBinding;
 import com.example.project2.database.CreatureBuddyRepository;
 import com.example.project2.database.entities.Buddies;
@@ -29,23 +34,76 @@ public class Battle extends AppCompatActivity {
     private BattleBinding binding;
     public boolean playerIsDefending = false;
     public boolean enemyIsDefending = false;
-    Buddies player = new Buddies("test Player", 20, 5, 2, 0, "@drawable/bulbasaur");
-    Buddies enemy = new Buddies("test Enemy", 15, 5, 2, 0, "@drawable/charizard");
-    private final int playerHp = player.getHealth();
-    private final int enemyHp = enemy.getHealth();
+    //Buddies player = new Buddies("test Player", 20, 5, 2, 0, "@drawable/bulbasaur");
+    //Buddies enemy = new Buddies("test Enemy", 15, 5, 2, 0, "@drawable/charizard");
+    private int playerHp;
+    private int enemyHp;
+
+    private int currUserId;
+    private int buddyId;
+    private CreatureBuddyRepository repository;
+    Buddies player;
+    Buddies enemy;
+    boolean playerLoaded = false;
+    boolean enemyLoaded = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
         binding = BattleBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.character2.setImageResource(
-                getResources().getIdentifier(player.getImageSource(), "drawable", getPackageName())
-        );
-        binding.character1.setImageResource(
-                getResources().getIdentifier(enemy.getImageSource(), "drawable", getPackageName())
-        );
-        startPlayerTurn(binding);
+
+        repository = CreatureBuddyRepository.getRepository(getApplication());
+        buddyId = getIntent().getIntExtra("BUDDY_ID", -1);
+        currUserId = getIntent().getIntExtra("USER_ID", -1);
+
+        getPlayerBuddy(buddyId);
+        getEnemyBuddy(getRandomNum());
+        //Log.d("BATTLE SCREEN", "BuddyId: " + buddyId + " UserId: " + currUserId);
+        //startPlayerTurn(binding);
+    }
+
+    private int getRandomNum(){
+        int randomInt = (int)(Math.random() * 9 + 1);
+        return randomInt;
+    }
+
+    private void getEnemyBuddy(int buddyId){
+        LiveData<Buddies> currEnemyBuddy = repository.getBuddiesById(buddyId);
+        currEnemyBuddy.observe(this, buddy -> {
+            if(buddy != null){
+                enemy = buddy;
+                enemyHp = enemy.getHealth();
+
+                binding.character1.setImageResource(
+                        getResources().getIdentifier(enemy.getImageSource(), "drawable", getPackageName())
+                );
+                enemyLoaded = true;
+                startBattleIfReady();
+            }
+        });
+    }
+
+    private void getPlayerBuddy(int buddyId){
+        LiveData<Buddies> currBuddy = repository.getBuddiesById(buddyId);
+        currBuddy.observe(this, buddy -> {
+            if(buddy != null){
+                player = buddy;
+                playerHp = player.getHealth();
+
+                binding.character2.setImageResource(
+                        getResources().getIdentifier(player.getImageSource(), "drawable", getPackageName())
+                );
+                playerLoaded = true;
+                startBattleIfReady();
+            }
+        });
+    }
+
+    private void startBattleIfReady() {
+        if (playerLoaded && enemyLoaded) {
+            startPlayerTurn(binding);
+        }
     }
 
     public void startPlayerTurn(BattleBinding binding) {
@@ -110,14 +168,28 @@ public class Battle extends AppCompatActivity {
     public void playerWin(){
         Toast.makeText(Battle.this, "You WON", Toast.LENGTH_SHORT).show();
         player.setHealth(playerHp);
-        Intent newIntent = characterInfoIntent(getApplicationContext(), 4, 4);
+        Intent newIntent = characterInfoIntent(getApplicationContext(), buddyId, currUserId);
         startActivity(newIntent);
     }
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
         enemy.setHealth(enemyHp);
-        Intent newIntent = mainActivityIntent(getApplicationContext(),4);
+        Intent newIntent = mainActivityIntent(getApplicationContext(), buddyId, currUserId);
         startActivity(newIntent);
+    }
+
+    static Intent mainActivityIntent(Context context, int buddyId, int currUserId) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("BUDDY_ID", buddyId);
+        intent.putExtra("USER_ID", currUserId);
+        return intent;
+    }
+
+    static Intent characterInfoIntent(Context context, int buddyId, int currUserId) {
+        Intent intent = new Intent(context, CharacterInformation.class);
+        intent.putExtra("BUDDY_ID", buddyId);
+        intent.putExtra("USER_ID", currUserId);
+        return intent;
     }
 
 }

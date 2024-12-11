@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     private int loggedInUserId = -1;
     private User user;
     private int clickedBuddyId;
+    private int buddyId;
+    private int currUserId;
 
     private ActivityMainBinding binding;
     @Override
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         repository = CreatureBuddyRepository.getRepository(getApplication());
+
+        buddyId = getIntent().getIntExtra("BUDDY_ID", -1);
+        currUserId = getIntent().getIntExtra("USER_ID", -1);
 
         //fetch the first 3 creaturebuddies
         int rand1 = getRandomNum(0, 0, 0);
@@ -68,8 +73,13 @@ public class MainActivity extends AppCompatActivity {
         buddyImgObserver(buddy2LiveData, creature2ImageButton);
         buddyImgObserver(buddy3LiveData, creature3ImageButton);
 
+        if(currUserId == -1) {
+            loginUser(savedInstanceState);
+        } else {
+            loggedInUserId = currUserId;
+            retrieveUser(loggedInUserId);
+        }
 
-        loginUser(savedInstanceState);
         if (loggedInUserId == -1) {
             Intent intent = LoginActivity.loginIntent(getApplicationContext());
             startActivity(intent);
@@ -106,6 +116,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //Toast.makeText(MainActivity.this, "You selected creature 3", Toast.LENGTH_SHORT).show();
                 passIdForBuddy(buddy3LiveData);
+            }
+        });
+    }
+
+    private void retrieveUser(int currUserId){
+        LiveData<User> currUser = repository.getUserByUserId(currUserId);
+        currUser.observe(this, newUser -> {
+            if(newUser != null){
+                user = newUser;
+            } else {
+                Log.d("USER RETRIEVAL", "FAILED TO RETRIEVE USER");
             }
         });
     }
