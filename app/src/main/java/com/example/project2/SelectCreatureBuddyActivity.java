@@ -18,8 +18,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.project2.database.entities.User;
-import com.example.project2.databinding.ActivityMainBinding;
 import com.example.project2.databinding.SelectCreatureBuddyBinding;
 
 
@@ -42,7 +40,7 @@ public class SelectCreatureBuddyActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.admin_select_starters);
+        setContentView(R.layout.select_creature_buddy);
         binding = SelectCreatureBuddyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         repository = CreatureBuddyRepository.getRepository(getApplication());

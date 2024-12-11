@@ -43,16 +43,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editBaseStat" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="130dp"
-        android:layout_height="80dp"
-        android:layout_margin="40dp"
-        android:text="@string/back"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/selectStarter" />
 
 
 
