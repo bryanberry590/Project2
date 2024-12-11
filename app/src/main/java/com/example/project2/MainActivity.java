@@ -95,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.rankingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BuddiesRankingActivity.class);
+                startActivity(intent);
+            }
+        });
+
         binding.creature1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
