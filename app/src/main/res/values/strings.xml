@@ -46,5 +46,7 @@
     <string name="creature_image">Creature Image</string>
     <string name="submit_changes">Submit Changes</string>
     <string name="submit_starters">Submit Starters</string>
+    <string name="enter_buddy_id">Enter Buddy Id</string>
+    <string name="view_global_rankings">View Global Rankings</string>
 
 </resources>
