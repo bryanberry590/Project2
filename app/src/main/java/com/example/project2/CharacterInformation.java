@@ -51,16 +51,8 @@ public class CharacterInformation extends AppCompatActivity{
         setContentView(R.layout.character_information);
         binding = CharacterInformationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent newIntent = battleIntent(getApplicationContext());
-                startActivity(newIntent);
-            }
-        });
-    }
-    static Intent battleIntent(Context context) {
-        return new Intent(context, Battle.class);
+        repository = CreatureBuddyRepository.getRepository(getApplication());
+
 
         repository = CreatureBuddyRepository.getRepository(getApplication());
 
@@ -73,7 +65,18 @@ public class CharacterInformation extends AppCompatActivity{
         LiveData<Buddies> selectedBuddyLiveData = repository.getBuddiesById(buddyId);
         setBuddyInfo(selectedBuddyLiveData, buddyId);
 
+        binding.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = battleIntent(getApplicationContext());
+                startActivity(newIntent);
+            }
+        });
     }
+
+    static Intent battleIntent(Context context) {
+        Intent intent = new Intent(context, Battle.class);
+        return intent;    }
 
     private void setBuddyInfo(LiveData<Buddies> selectedBuddy, int buddyId){
         TextView statView = (TextView)findViewById(R.id.statTextViewBox);

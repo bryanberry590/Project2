@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project2.databinding.BattleBinding;
@@ -38,6 +37,7 @@ public class Battle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battle);
         binding = BattleBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         startPlayerTurn(binding);
     }
 
@@ -97,8 +97,18 @@ public class Battle extends AppCompatActivity {
     public void playerLose(){
         Toast.makeText(Battle.this, "You LOST", Toast.LENGTH_SHORT).show();
         enemy.setHealth(enemyHp);
-        Intent newIntent = mainActivityIntent(getApplicationContext(),4);
+        Intent newIntent = mainActivityIntent(getApplicationContext()); // there was a 4 hereafter the getAppContext()
         startActivity(newIntent);
+    }
+
+    static Intent mainActivityIntent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
+    }
+
+    static Intent characterInfoIntent(Context context){
+        Intent intent = new Intent(context, CharacterInformation.class);
+        return intent;
     }
 
 }
