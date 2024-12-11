@@ -7,8 +7,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.project2.MainActivity;
 import com.example.project2.database.entities.Buddies;
+import com.example.project2.database.entities.BuddyRanking;
 import com.example.project2.database.entities.User;
 
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -17,16 +19,18 @@ public class CreatureBuddyRepository {
 
     private final UserDAO userDAO;
     private final BuddiesDAO buddiesDAO;
+    private final BuddyRankingDAO buddyRankingDAO;
     private static CreatureBuddyRepository repository;
 
     private CreatureBuddyRepository(Application application) {
         CreatureBuddyDatabase db = CreatureBuddyDatabase.getDatabase(application);
         this.userDAO = db.userDAO();
         this.buddiesDAO = db.buddiesDAO();
+        this.buddyRankingDAO = db.buddyRankingDAO();
     }
 
-    public static CreatureBuddyRepository getRepository(Application application){
-        if(repository != null){
+    public static CreatureBuddyRepository getRepository(Application application) {
+        if (repository != null) {
             return repository;
         }
         Future<CreatureBuddyRepository> future = CreatureBuddyDatabase.databaseWriteExecutor.submit(
@@ -104,5 +108,47 @@ public class CreatureBuddyRepository {
 
     public LiveData<Buddies> getBuddiesById(int buddiesId){
         return buddiesDAO.getBuddiesById(buddiesId);
+    }
+
+    public LiveData<List<Buddies>> getAllBuddies() {
+        return buddiesDAO.getAllBuddies();
+    }
+
+    // Buddy Ranking methods
+    public void insertBuddyRanking(BuddyRanking... rankings) {
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
+            try {
+                buddyRankingDAO.insert(rankings);
+                Log.d("CreatureBuddyRepository", "Buddy ranking inserted successfully");
+            } catch (Exception e) {
+                Log.e("CreatureBuddyRepository", "Error inserting buddy ranking", e);
+            }
+        });
+    }
+
+    public LiveData<List<BuddyRanking>> getAllRankings() {
+        return buddyRankingDAO.getAllRankings();
+    }
+
+    public LiveData<BuddyRanking> getRankingByBuddyId(int buddyId) {
+        return buddyRankingDAO.getRankingByBuddyId(buddyId);
+    }
+
+    public void incrementWins(int buddyId) {
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
+            buddyRankingDAO.incrementWins(buddyId);
+        });
+    }
+
+    public void incrementLosses(int buddyId) {
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
+            buddyRankingDAO.incrementLosses(buddyId);
+        });
+    }
+
+    public void deleteBuddyRanking(int buddyId) {
+        CreatureBuddyDatabase.databaseWriteExecutor.execute(() -> {
+            buddyRankingDAO.deleteRanking(buddyId);
+        });
     }
 }

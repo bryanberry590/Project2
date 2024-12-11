@@ -12,17 +12,19 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.project2.MainActivity;
 import com.example.project2.R;
 import com.example.project2.database.entities.Buddies;
+import com.example.project2.database.entities.BuddyRanking;
 import com.example.project2.database.entities.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // increment every time you change the database
-@Database(entities = {User.class , Buddies.class}, version = 5, exportSchema = false)
+@Database(entities = {User.class, Buddies.class, BuddyRanking.class}, version = 6, exportSchema = false)
 public abstract class CreatureBuddyDatabase extends RoomDatabase {
 
     public static final String USER_TABLE = "usertable";
     public static final String BuddiesTable = "buddiesTable";
+    public static final String BUDDY_RANKING_TABLE = "buddyRankingTable";
     private static final String DATABASE_NAME = "creatureBuddyDatabase";
 
     private static volatile CreatureBuddyDatabase INSTANCE;
@@ -32,12 +34,12 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
     static CreatureBuddyDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (CreatureBuddyDatabase.class) {
-                if (INSTANCE == null){
+                if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
                             CreatureBuddyDatabase.class,
                             DATABASE_NAME
-                                    )
+                    )
                             .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
                             .build();
@@ -47,9 +49,9 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
+    private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback() {
         @Override
-        public void onCreate (@NonNull SupportSQLiteDatabase db){
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Log.i(MainActivity.TAG, "DATABASE created!");
             databaseWriteExecutor.execute(() -> {
@@ -84,10 +86,23 @@ public abstract class CreatureBuddyDatabase extends RoomDatabase {
                 dao2.insert(squirtle);
                 dao2.insert(umbreon);
 
+                // Initialize rankings for all buddies
+                BuddyRankingDAO rankingDAO = INSTANCE.buddyRankingDAO();
+                rankingDAO.deleteAll();
+                rankingDAO.insert(new BuddyRanking(1)); // breloom
+                rankingDAO.insert(new BuddyRanking(2)); // bulbasaur
+                rankingDAO.insert(new BuddyRanking(3)); // charizard
+                rankingDAO.insert(new BuddyRanking(4)); // gardevoir
+                rankingDAO.insert(new BuddyRanking(5)); // hawlucha
+                rankingDAO.insert(new BuddyRanking(6)); // mewtwo
+                rankingDAO.insert(new BuddyRanking(7)); // pikachu
+                rankingDAO.insert(new BuddyRanking(8)); // squirtle
+                rankingDAO.insert(new BuddyRanking(9)); // umbreon
             });
         }
     };
 
     public abstract UserDAO userDAO();
     public abstract BuddiesDAO buddiesDAO();
+    public abstract BuddyRankingDAO buddyRankingDAO();
 }
