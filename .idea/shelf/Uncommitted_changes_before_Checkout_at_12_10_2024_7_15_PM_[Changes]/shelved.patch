@@ -1,0 +1,165 @@
+Index: app/src/main/res/layout/edit_creature_buddy.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/editTextMessage\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:text=\"@string/edit_screen_message\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <FrameLayout\r\n        android:id=\"@+id/Frame\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginTop=\"32dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/editTextMessage\">\r\n\r\n        <ExpandableListView\r\n            android:layout_width=\"250dp\"\r\n            android:layout_height=\"100dp\"\r\n            app:layout_constraintTop_toTopOf=\"@id/Frame\"\r\n            tools:ignore=\"MissingConstraints\" />\r\n    </FrameLayout>\r\n\r\n    <TextView\r\n        android:id=\"@+id/healthLabel\"\r\n        android:layout_width=\"120dp\"\r\n        android:layout_height=\"52dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:text=\"@string/health\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/healthEditText\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/Frame\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/healthEditText\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"28dp\"\r\n        android:hint=\"@string/healthHint\"\r\n        android:inputType=\"number\"\r\n        android:textAlignment=\"center\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.8\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/Frame\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/attackLabel\"\r\n        android:layout_width=\"120dp\"\r\n        android:layout_height=\"52dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:text=\"@string/attack_label\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/attackEditText\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/healthLabel\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/attackEditText\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"28dp\"\r\n        android:hint=\"@string/attack_hint\"\r\n        android:inputType=\"number\"\r\n        android:textAlignment=\"center\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.8\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/healthEditText\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/defenseLabel\"\r\n        android:layout_width=\"125dp\"\r\n        android:layout_height=\"52dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:text=\"@string/defense_label\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/defenseEditText\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/attackLabel\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/defenseEditText\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:layout_marginTop=\"28dp\"\r\n        android:hint=\"@string/defense\"\r\n        android:inputType=\"number\"\r\n        android:textAlignment=\"center\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.8\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/attackEditText\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/creatureImageBox\"\r\n        android:layout_width=\"200dp\"\r\n        android:layout_height=\"200dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:contentDescription=\"@string/creature_image\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/defenseLabel\"\r\n        android:src=\"@drawable/mewtwo\"/>\r\n<!--   TODO: for imageView, if we want the image of a creature to appear there, we need \"android:src=\"PATH\", -->\r\n<!--        else we can remove the image view entirely and spread out the page elements -->\r\n\r\n    <Button\r\n        android:layout_width=\"200dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:text=\"@string/submit_changes\"\r\n        android:textSize=\"32sp\"\r\n        android:id=\"@+id/submitButton\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/creatureImageBox\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/edit_creature_buddy.xml b/app/src/main/res/layout/edit_creature_buddy.xml
+--- a/app/src/main/res/layout/edit_creature_buddy.xml	(revision 8710079fb6753a9da08cdd92f84653905893b1cf)
++++ b/app/src/main/res/layout/edit_creature_buddy.xml	(date 1733886892499)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:layout_width="match_parent"
+@@ -17,21 +18,15 @@
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+-    <FrameLayout
+-        android:id="@+id/Frame"
+-        android:layout_width="250dp"
+-        android:layout_height="100dp"
+-        android:layout_marginTop="32dp"
+-        app:layout_constraintEnd_toEndOf="parent"
++    <Spinner
++        android:id="@+id/creatureTypeSpinner"
++        android:layout_width="200dp"
++        android:layout_height="50dp"
++        android:layout_marginTop="16dp"
++        android:spinnerMode="dropdown"
++        app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@id/editTextMessage">
+-
+-        <ExpandableListView
+-            android:layout_width="250dp"
+-            android:layout_height="100dp"
+-            app:layout_constraintTop_toTopOf="@id/Frame"
+-            tools:ignore="MissingConstraints" />
+-    </FrameLayout>
++        app:layout_constraintEnd_toEndOf="parent" />
+ 
+     <TextView
+         android:id="@+id/healthLabel"
+@@ -44,7 +39,7 @@
+         android:textSize="32sp"
+         app:layout_constraintEnd_toStartOf="@+id/healthEditText"
+         app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/Frame" />
++        app:layout_constraintTop_toBottomOf="@+id/creatureTypeSpinner" />
+ 
+     <EditText
+         android:id="@+id/healthEditText"
+Index: app/src/main/res/layout/battle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/main\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/greeting\"\r\n        android:layout_width=\"382dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"20dp\"\r\n        android:gravity=\"center\"\r\n        android:padding=\"8dp\"\r\n        android:text=\"@string/battle\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/health\"\r\n        android:layout_width=\"382dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:gravity=\"center\"\r\n        android:padding=\"8dp\"\r\n        android:text=\"@string/pc_health\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/greeting\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/character1\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginTop=\"48dp\"\r\n        android:layout_marginEnd=\"64dp\"\r\n        android:contentDescription=\"@string/todo\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/health\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/character2\"\r\n        android:layout_width=\"100dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"64dp\"\r\n        android:layout_marginTop=\"64dp\"\r\n        android:contentDescription=\"@string/todo\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/character1\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/health2\"\r\n        android:layout_width=\"382dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_marginTop=\"32dp\"\r\n        android:gravity=\"center\"\r\n        android:padding=\"8dp\"\r\n        android:text=\"@string/pc_health\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/character2\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/Attack\"\r\n        android:layout_width=\"190dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginStart=\"8dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:text=\"@string/attack\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/health2\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/Defend\"\r\n        android:layout_width=\"190dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:layout_marginEnd=\"8dp\"\r\n        android:text=\"@string/defend\"\r\n        android:textSize=\"16sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@id/health2\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/battle.xml b/app/src/main/res/layout/battle.xml
+--- a/app/src/main/res/layout/battle.xml	(revision 8710079fb6753a9da08cdd92f84653905893b1cf)
++++ b/app/src/main/res/layout/battle.xml	(date 1733886892506)
+@@ -1,5 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/main"
+Index: app/src/main/java/com/example/project2/editCreatureBuddyActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.project2;\r\n\r\nimport android.os.Bundle;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\npublic class editCreatureBuddyActivity extends AppCompatActivity {\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.edit_creature_buddy);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/project2/editCreatureBuddyActivity.java b/app/src/main/java/com/example/project2/editCreatureBuddyActivity.java
+--- a/app/src/main/java/com/example/project2/editCreatureBuddyActivity.java	(revision 8710079fb6753a9da08cdd92f84653905893b1cf)
++++ b/app/src/main/java/com/example/project2/editCreatureBuddyActivity.java	(date 1733886892513)
+@@ -1,6 +1,9 @@
+ package com.example.project2;
+ 
+ import android.os.Bundle;
++import android.widget.ArrayAdapter;
++import android.widget.Spinner;
++
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ public class editCreatureBuddyActivity extends AppCompatActivity {
+@@ -8,5 +11,21 @@
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.edit_creature_buddy);
++
++        Spinner creatureTypeSpinner = findViewById(R.id.creatureTypeSpinner);
++
++        // Create an ArrayAdapter using a simple spinner layout and your list of options
++        String[] creatureTypes = {"Fire", "Water", "Grass", "Electric"};
++        ArrayAdapter<String> adapter = new ArrayAdapter<>(
++                this,
++                android.R.layout.simple_spinner_item,
++                creatureTypes
++        );
++        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
++        creatureTypeSpinner.setAdapter(adapter);
++
++        // Set a listener to handle selection
++        creatureTypeSpinner.setOnItemSelectedListener(new itemSelectedListener());
+     }
++
+ }
+\ No newline at end of file
+Index: app/src/main/res/layout/admin_select_starters.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <TextView\r\n        android:id=\"@+id/selectStartersMsg\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"50dp\"\r\n        android:layout_margin=\"30dp\"\r\n        android:text=\"@string/select_starters\"\r\n        android:textAlignment=\"center\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Spinner\r\n        android:id=\"@+id/spinner1\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"80dp\"\r\n        android:layout_margin=\"50dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/selectStartersMsg\" />\r\n\r\n    <Spinner\r\n        android:id=\"@+id/spinner2\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"80dp\"\r\n        android:layout_margin=\"50dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/spinner1\" />\r\n\r\n    <Spinner\r\n        android:id=\"@+id/spinner3\"\r\n        android:layout_width=\"250dp\"\r\n        android:layout_height=\"80dp\"\r\n        android:layout_margin=\"50dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/spinner2\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/submitButton\"\r\n        android:layout_width=\"150dp\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_margin=\"50dp\"\r\n        android:text=\"@string/submit_starters\"\r\n        android:textSize=\"25sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/spinner3\" />\r\n\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/admin_select_starters.xml b/app/src/main/res/layout/admin_select_starters.xml
+--- a/app/src/main/res/layout/admin_select_starters.xml	(revision 8710079fb6753a9da08cdd92f84653905893b1cf)
++++ b/app/src/main/res/layout/admin_select_starters.xml	(date 1733886892519)
+@@ -9,7 +9,7 @@
+         android:layout_width="300dp"
+         android:layout_height="50dp"
+         android:layout_margin="30dp"
+-        android:text="@string/select_starters"
++        android:text="Select Starters"
+         android:textAlignment="center"
+         android:textSize="32sp"
+         app:layout_constraintEnd_toEndOf="parent"
+Index: app/src/main/java/com/example/project2/itemSelectedListener.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/project2/itemSelectedListener.java b/app/src/main/java/com/example/project2/itemSelectedListener.java
+new file mode 100644
+--- /dev/null	(date 1733886892524)
++++ b/app/src/main/java/com/example/project2/itemSelectedListener.java	(date 1733886892524)
+@@ -0,0 +1,18 @@
++package com.example.project2;
++
++import android.view.View;
++import android.widget.AdapterView;
++import android.widget.Toast;
++
++public class itemSelectedListener implements AdapterView.OnItemSelectedListener {
++    @Override
++    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
++        String item = parent.getItemAtPosition(pos).toString();
++        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_SHORT).show();
++    }
++
++    @Override
++    public void onNothingSelected(AdapterView<?> parent) {
++        // Do nothing
++    }
++}

@@ -9,7 +9,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_margin="30dp"
-        android:text="@string/select_starters"
+        android:text="Select Starters"
         android:textAlignment="center"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
