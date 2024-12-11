@@ -169,7 +169,7 @@ public class Battle extends AppCompatActivity {
         Toast.makeText(Battle.this, "You WON", Toast.LENGTH_SHORT).show();
         player.setHealth(playerHp);
         repository.incrementWins(buddyId);
-        Intent newIntent = characterInfoIntent(getApplicationContext(), buddyId, currUserId);
+        Intent newIntent = mainActivityIntent(getApplicationContext(), buddyId, currUserId);
         startActivity(newIntent);
     }
     public void playerLose(){
