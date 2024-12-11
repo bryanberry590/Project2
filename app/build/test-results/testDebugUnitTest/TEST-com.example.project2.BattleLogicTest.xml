@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.project2.BattleLogicTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2024-12-11T08:22:30" hostname="MacBook-Pro.local" time="0.001">
+  <properties/>
+  <testcase name="testPlayerWinCondition" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testDefending" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testPlayerDefendingReducesDamage" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testMultipleAttacksReduceHealth" classname="com.example.project2.BattleLogicTest" time="0.001"/>
+  <testcase name="testEnemyDefendingReducesDamage" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testResetHealthRestoresHealth" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testAttack" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <testcase name="testAttackMinimumDamageIsOne" classname="com.example.project2.BattleLogicTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
