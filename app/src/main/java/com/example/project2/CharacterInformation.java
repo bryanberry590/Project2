@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import static com.example.project2.MainActivity.mainActivityIntent;
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +17,7 @@ import android.widget.TextView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.project2.database.entities.Buddies;
 import com.example.project2.databinding.CharacterInformationBinding;
@@ -46,6 +51,16 @@ public class CharacterInformation extends AppCompatActivity{
         setContentView(R.layout.character_information);
         binding = CharacterInformationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = battleIntent(getApplicationContext());
+                startActivity(newIntent);
+            }
+        });
+    }
+    static Intent battleIntent(Context context) {
+        return new Intent(context, Battle.class);
 
         repository = CreatureBuddyRepository.getRepository(getApplication());
 
