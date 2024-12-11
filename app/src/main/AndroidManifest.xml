@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".BuddiesRankingActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
@@ -27,7 +30,6 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".CharacterInformation" />
-
     </application>
 
 </manifest>

@@ -80,5 +80,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creature2" />
 
+    <Button
+        android:id="@+id/rankingsButton"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:text="View Rankings"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/creature3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

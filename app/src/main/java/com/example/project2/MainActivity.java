@@ -53,7 +53,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "You are an admin", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        binding.rankingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, BuddiesRankingActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -159,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         return true;
     }
 
